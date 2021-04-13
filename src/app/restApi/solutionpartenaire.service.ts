@@ -35,11 +35,17 @@ export class SolutionPartenaireService {
   }
 
   public updateSolutionPartenaire(solutionpartenaire: SolutionPartenaire): Observable<SolutionPartenaire>{
-    return this.http.put<SolutionPartenaire>(`${this.apiServerUrl}/update`,solutionpartenaire);
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.put<SolutionPartenaire>(`${this.apiServerUrl}/update`,solutionpartenaire,{headers});
   }
 
   public deleteSolutionPartenaire(solutionpartenaireId: string): Observable<void>{
-    return this.http.delete<void>(`${this.apiServerUrl}/delete/${solutionpartenaireId}`);
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${solutionpartenaireId}`,{headers});
   }
 
 }
