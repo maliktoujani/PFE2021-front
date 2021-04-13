@@ -1,0 +1,53 @@
+<h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Gestion solution partenaire</h2>
+<br>
+<div fxLayout="row" fxLayoutAlign="center">
+    <ul fxLayout="row" fxLayoutGap="20px">
+        <li>
+            <mat-form-field><input matInput placeholder="Rechercher"></mat-form-field>
+
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option *ngFor="let solution of solutions">
+                    {{solution?.email}}
+                </mat-list-option>
+            </mat-selection-list>
+        </li>
+        <ul>
+            <li><mat-form-field><input matInput placeholder="Identifiant"></mat-form-field></li>
+            <li><mat-form-field><mat-label>Email</mat-label><input matInput placeholder="Ex. sol@example.com"></mat-form-field></li>
+            <li><mat-form-field><mat-label>Tel/Fax</mat-label><input matInput placeholder="+216"></mat-form-field></li>
+            <li fxLayout="row" fxLayoutAlign="center center">
+                <button mat-raised-button color="primary" (click)="openDialogAjout()">Ajouter</button>
+                <button mat-button color="primary" (click)="openDialogSupp()">Supprimer</button>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+                    <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef> No. </th>
+                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="contrat">
+                        <th mat-header-cell *matHeaderCellDef> Contrats </th>
+                        <td mat-cell *matCellDef="let element"> {{element.contrat}} </td>
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </li>
+        </ul>
+    </ul>    
+</div>
+
+<mat-divider></mat-divider>
+
+<ul fxLayout="row" fxLayoutAlign="center center">
+    <button mat-raised-button color="primary">Valider</button>
+    <button mat-button color="primary">Annuler</button>
+</ul>  
+
+
+  

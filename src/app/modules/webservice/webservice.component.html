@@ -1,0 +1,44 @@
+<h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Paramètrer les web service</h2>
+
+<div>
+    <ul fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+        <li>
+            <mat-form-field><input matInput placeholder="Rechercher"></mat-form-field>
+
+            <mat-selection-list [multiple]="false">
+                <mat-list-option *ngFor="let webservice of webservices">
+                {{webservice.viewValue}}
+                </mat-list-option>
+            </mat-selection-list>
+        </li>
+        <li fxLayout="column">
+            <mat-form-field><input matInput placeholder="URL"></mat-form-field>
+            <mat-form-field>
+                <mat-label>Format</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let format of formats" [value]="format.value">
+                    {{format.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </li>
+        <li>
+            <section fxLayout="column" fxLayoutAlign="start" class="example-section">
+                <mat-label>Requettes HTTP</mat-label>
+                <mat-checkbox class="example-margin">GET</mat-checkbox>
+                <mat-checkbox class="example-margin">POST</mat-checkbox>
+                <mat-checkbox class="example-margin">PUT</mat-checkbox>
+                <mat-checkbox class="example-margin">PATCH</mat-checkbox>
+                <mat-checkbox class="example-margin">DELETE</mat-checkbox>
+                <mat-checkbox class="example-margin">UPDATE</mat-checkbox>
+                <mat-checkbox class="example-margin">COPY</mat-checkbox>
+                <mat-checkbox class="example-margin">HEAD</mat-checkbox>
+            </section>
+        </li>
+    </ul>
+    <mat-divider></mat-divider>
+    <ul fxLayoutAlign="center">
+        <button mat-raised-button color="primary">Valider</button>
+        <button mat-button color="primary">Annuler</button>
+    </ul>
+</div>
