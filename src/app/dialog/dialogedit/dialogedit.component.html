@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Modifier une solution partenaire</h2>
+
+<form #addForm="ngForm" (ngSubmit)="onEditSolutionPartenaire(addForm)">
+    <ul>
+        <input type="hidden" ngModel="{{data.id}}" name="id">
+        <li><mat-form-field><mat-label>Email</mat-label><input matInput type="email" ngModel="{{data.email}}" name="email" placeholder="Ex. sol@example.com" required></mat-form-field></li>
+        <li><mat-form-field><mat-label>Tel/Fax</mat-label><input matInput ngModel="{{data.phone}}" name="phone" placeholder="+216" required></mat-form-field></li>
+        <li><mat-form-field><input matInput type="password" ngModel="{{data.password}}" name="password" placeholder="Nouveau mot de passe" required></mat-form-field></li>
+    </ul>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-button type="submit" [disabled]="addForm.invalid">Valider</button>
+        <button mat-button id="closebutton" mat-dialog-close>Annuler</button>
+    </div>
+</form>

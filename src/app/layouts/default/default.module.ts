@@ -32,6 +32,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { DialogsettingsComponent } from 'src/app/dialog/dialogsettings/dialogsettings.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {TestComponent} from '../../modules/test/test.component';
+import { DialogeditComponent } from 'src/app/dialog/dialogedit/dialogedit.component';
+
 
 @NgModule({
   declarations: [
@@ -45,9 +48,11 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     DialogaccesComponent,
     WebserviceComponent,
-    DialogsettingsComponent
+    DialogsettingsComponent,
+    TestComponent,
+    DialogeditComponent
   ],
-  entryComponents:[DialogajoutComponent],
+  entryComponents: [DialogajoutComponent],
   imports: [
     CommonModule,
     RouterModule,
