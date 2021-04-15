@@ -34,6 +34,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {TestComponent} from '../../modules/test/test.component';
 import { DialogeditComponent } from 'src/app/dialog/dialogedit/dialogedit.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { DialogeditComponent } from 'src/app/dialog/dialogedit/dialogedit.compon
     MatIconModule,
     MatCheckboxModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ],
   providers: [
     DashboardService
