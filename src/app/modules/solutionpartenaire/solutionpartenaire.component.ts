@@ -19,7 +19,7 @@ export class SolutionpartenaireComponent implements OnInit{
   solutions:SolutionPartenaire[];
 
   ngOnInit(){
-    this.getSolutions();
+    this.getSolutions(); 
   }
 
   public getSolutions(){
