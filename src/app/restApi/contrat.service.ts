@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { SolutionPartenaire } from './solutionpartenaire.service';
 
 export interface Contrat {
   id:string;
   dateDebut:Date;
   dateFin:Date;
-  label:Number;
+  label:string;
+  solutionPartenaire:SolutionPartenaire;
 }
 
 @Injectable({
