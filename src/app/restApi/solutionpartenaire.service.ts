@@ -6,8 +6,9 @@ import { Contrat } from './contrat.service';
 
 export interface SolutionPartenaire {
   id:string;
-  email:string;
+  username:string;
   password:string;
+  email:string;
   phone:Number;
   contrats:Contrat[];
 }

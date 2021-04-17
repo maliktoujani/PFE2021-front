@@ -6,6 +6,7 @@ import { SolutionPartenaire } from './solutionpartenaire.service';
 
 export interface Contrat {
   id:string;
+  title:string;
   dateDebut:Date;
   dateFin:Date;
   label:string;

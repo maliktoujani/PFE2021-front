@@ -15,7 +15,7 @@ export class SolutionpartenaireComponent implements OnInit{
 
   constructor(private solutionpartenaireService?: SolutionPartenaireService, private dialog?:MatDialog){}
 
-  displayedColumns= ["id", "email", "password", "phone", "actions"];
+  displayedColumns= ["username", "email", "phone", "password", "actions"];
   solutions:SolutionPartenaire[];
 
   ngOnInit(){
@@ -41,6 +41,7 @@ export class SolutionpartenaireComponent implements OnInit{
     this.dialog.open(DialogeditComponent,{
       data:{
         id:element.id,
+        username:element.username,
         email:element.email,
         phone:element.phone,
         password:element.password
@@ -60,7 +61,8 @@ export class SolutionpartenaireComponent implements OnInit{
   public searchSolutions(key:string):void{
     const results:SolutionPartenaire[]=[];
     for(const solution of this.solutions){
-      if(solution.email.toLowerCase().indexOf(key.toLowerCase()) !== -1){
+      if(solution.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+         solution.username.toLowerCase().indexOf(key.toLowerCase()) !== -1){
         results.push(solution);
       }
     }

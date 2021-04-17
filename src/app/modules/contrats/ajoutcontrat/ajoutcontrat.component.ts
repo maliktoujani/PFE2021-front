@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogaccesComponent } from 'src/app/dialog/dialogacces/dialogacces.component';
+import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
 
 
 interface objet {
@@ -25,11 +27,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AjoutcontratComponent {
 
-  SP: objet[] = [
-    {value: 'Solution partenaire 1', viewValue: 'Solution partenaire 1'},
-    {value: 'Solution partenaire 2', viewValue: 'Solution partenaire 2'},
-    {value: 'Solution partenaire 3', viewValue: 'Solution partenaire 3'}
-  ];
+  solutions:SolutionPartenaire[];
 
   WS: objet[] = [
     {value: 'Web service 1', viewValue: 'Web service 1'},
@@ -43,7 +41,24 @@ export class AjoutcontratComponent {
   dataSource = ELEMENT_DATA;
 
 
-  constructor(public dialog:MatDialog) { }
+  constructor(private solutionpartenaireService?: SolutionPartenaireService, public dialog?:MatDialog) { }
+
+
+
+  ngOnInit(){
+    this.getSolutions(); 
+  }
+
+  public getSolutions(){
+    this.solutionpartenaireService.getAllSolutions().subscribe(
+      (response: SolutionPartenaire[]) => {
+        this.solutions=response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+      );
+  }
 
   openDialogAcces(){
     this.dialog.open(DialogaccesComponent);
