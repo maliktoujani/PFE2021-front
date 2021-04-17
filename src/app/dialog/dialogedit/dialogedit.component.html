@@ -3,6 +3,7 @@
 <form #addForm="ngForm" (ngSubmit)="onEditSolutionPartenaire(addForm)">
     <ul>
         <input type="hidden" ngModel="{{data.id}}" name="id">
+        <li><mat-form-field><mat-label>Username</mat-label><input matInput ngModel="{{data.username}}" name="username" required></mat-form-field></li>
         <li><mat-form-field><mat-label>Email</mat-label><input matInput type="email" ngModel="{{data.email}}" name="email" placeholder="Ex. sol@example.com" required></mat-form-field></li>
         <li><mat-form-field><mat-label>Tel/Fax</mat-label><input matInput ngModel="{{data.phone}}" name="phone" placeholder="+216" required></mat-form-field></li>
         <li><mat-form-field><input matInput type="password" ngModel="{{data.password}}" name="password" placeholder="Nouveau mot de passe" required></mat-form-field></li>

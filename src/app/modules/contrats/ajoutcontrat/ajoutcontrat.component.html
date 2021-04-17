@@ -5,12 +5,12 @@
 <div>
     <ul fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
         <li>
-            <mat-form-field><input matInput placeholder="Nom du contrat"></mat-form-field>
+            <mat-form-field><input matInput placeholder="Titre"></mat-form-field>
         </li>
         <li>
             <mat-form-field>
                 <mat-label>Date début</mat-label>
-                <input matInput [matDatepicker]="picker">
+                <input matInput placeholder="YYYY-MM-DD" [matDatepicker]="picker">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -18,7 +18,7 @@
         <li>
             <mat-form-field>
                 <mat-label>Date fin</mat-label>
-                <input matInput [matDatepicker]="picker2">
+                <input matInput placeholder="YYYY-MM-DD" [matDatepicker]="picker2">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
@@ -27,8 +27,8 @@
             <mat-form-field>
                 <mat-label>Solution partenaire</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let solution of SP" [value]="solution.value">
-                    {{solution.viewValue}}
+                    <mat-option *ngFor="let solution of solutions">
+                        {{solution.username}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -45,7 +45,7 @@
                         <mat-label>Web service</mat-label>
                         <mat-select>
                             <mat-option *ngFor="let webservice of WS" [value]="webservice.value">
-                            {{webservice.viewValue}}
+                                {{webservice.viewValue}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
