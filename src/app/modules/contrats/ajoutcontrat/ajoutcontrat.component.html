@@ -3,37 +3,41 @@
 <br>
 
 <div>
-    <ul fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
-        <li>
-            <mat-form-field><input matInput placeholder="Titre"></mat-form-field>
-        </li>
-        <li>
-            <mat-form-field>
-                <mat-label>Date début</mat-label>
-                <input matInput placeholder="YYYY-MM-DD" [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </li>
-        <li>
-            <mat-form-field>
-                <mat-label>Date fin</mat-label>
-                <input matInput placeholder="YYYY-MM-DD" [matDatepicker]="picker2">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-        </li>
-        <li>
-            <mat-form-field>
-                <mat-label>Solution partenaire</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let solution of solutions">
-                        {{solution.username}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </li>  
-    </ul>
+    <form #addForm="ngForm" (ngSubmit)="onAddContrat(addForm)">
+        <ul fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
+            <li>
+                <mat-form-field><input matInput ngModel name="title" placeholder="Titre"></mat-form-field>
+            </li>
+            <li>
+                <mat-form-field>
+                    <mat-label>Date début</mat-label>
+                    <input matInput ngModel name="dateDebut" placeholder="DD-MM-YYYY" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </li>
+            <li>
+                <mat-form-field>
+                    <mat-label>Date fin</mat-label>
+                    <input matInput ngModel name="dateFin" placeholder="DD-MM-YYYY" [matDatepicker]="picker2">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+            </li>
+            <li>
+                <mat-form-field>
+                    <mat-label>Solution partenaire</mat-label>
+                    <mat-select ngModel name="solutionPartenaire">
+                        <mat-option *ngFor="let solution of solutions" [value]="solution">
+                            {{solution.username}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </li>  
+            <li>
+                <mat-form-field><input matInput ngModel name="label" placeholder="Label"></mat-form-field>
+            </li>
+        </ul>
 
     <ul fxLayout="column">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
@@ -78,12 +82,10 @@
     <mat-divider></mat-divider>
 
     <ul fxLayoutAlign="center">
-        <button mat-raised-button color="primary">Valider</button>
+        <button mat-raised-button type="submit" color="primary">Valider</button>
         <button mat-button color="primary">Annuler</button>
     </ul>
 
+    </form>
+
 </div>
-
-
-   
-

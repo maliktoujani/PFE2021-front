@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogaccesComponent } from 'src/app/dialog/dialogacces/dialogacces.component';
+import { Contrat, ContratService } from 'src/app/restApi/contrat.service';
 import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
 
 
@@ -41,7 +43,7 @@ export class AjoutcontratComponent {
   dataSource = ELEMENT_DATA;
 
 
-  constructor(private solutionpartenaireService?: SolutionPartenaireService, public dialog?:MatDialog) { }
+  constructor(private solutionpartenaireService: SolutionPartenaireService, private contratService:ContratService , public dialog:MatDialog) { }
 
 
 
@@ -63,5 +65,18 @@ export class AjoutcontratComponent {
   openDialogAcces(){
     this.dialog.open(DialogaccesComponent);
   }
+
+  public onAddContrat(addForm: NgForm): void {
+    this.contratService.addContrat(addForm.value).subscribe(
+      (response: Contrat) => {
+        console.log(addForm.value);
+        
+      },
+      (error: HttpErrorResponse) => {
+          alert(error.message);
+      }
+    );
+  }
+
 
 }

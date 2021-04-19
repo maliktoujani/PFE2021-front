@@ -29,7 +29,10 @@ export class ContratService {
   }
 
   public addContrat(contrat: Contrat): Observable<Contrat>{
-    return this.http.post<Contrat>(`${this.apiServerUrl}/add`,contrat);
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.post<Contrat>(`${this.apiServerUrl}/add`,contrat,{headers});
   }
 
   public updateContrat(contrat: Contrat): Observable<Contrat>{
