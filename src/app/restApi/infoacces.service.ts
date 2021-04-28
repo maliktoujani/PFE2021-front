@@ -1,0 +1,45 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Contrat } from './contrat.service';
+import { WebService } from './webservice.service';
+
+export class InfoAcces {
+  id:number;
+  commentaire:string;
+  contrat:Contrat;
+  webService:WebService;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class InfoaccesService {
+
+  private apiServerUrl=environment.apiBaseUrl+'/infoacces';
+  constructor(private http: HttpClient) { }
+
+  public getAllInfoAcces(): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/all`,{headers});
+  }
+
+  public addInfoAcces(infoacces:InfoAcces): Observable<InfoAcces>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.post<InfoAcces>(`${this.apiServerUrl}/add`,infoacces,{headers});
+  }
+
+  public updateInfoAcces(infoacces:InfoAcces): Observable<InfoAcces>{
+    return this.http.put<InfoAcces>(`${this.apiServerUrl}/update`,infoacces);
+  }
+
+  public deleteInfoAcces(infoaccesId: string): Observable<void>{
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${infoaccesId}`);
+  }
+
+}

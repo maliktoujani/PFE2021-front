@@ -30,11 +30,12 @@ import {MatIconModule} from '@angular/material/icon';
 import { WebserviceComponent } from 'src/app/modules/webservice/webservice.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { DialogsettingsComponent } from 'src/app/dialog/dialogsettings/dialogsettings.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {TestComponent} from '../../modules/test/test.component';
 import { DialogeditComponent } from 'src/app/dialog/dialogedit/dialogedit.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 @NgModule({
@@ -76,7 +77,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatCheckboxModule,
     FormsModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ReactiveFormsModule,
+    MatStepperModule
   ],
   providers: [
     DashboardService

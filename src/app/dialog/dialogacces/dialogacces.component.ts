@@ -1,15 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { PeriodeAcces, PeriodeaccesService } from 'src/app/restApi/periodeacces.service';
 
-
-interface PeriodicElement {
-  contrat: string;
-  position: number;
-  details: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, contrat: 'Contrat C1', details:'1'},
-];
 
 @Component({
   selector: 'app-dialogacces',
@@ -20,12 +13,50 @@ export class DialogaccesComponent implements OnInit {
 
   days: string[] = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 
-  displayedColumns: string[] = ['jours', 'heuredeb','heurefin'];
-  dataSource = ELEMENT_DATA;
+  myForm:FormGroup;
 
-  constructor() { }
+  constructor(private periodeaccesService:PeriodeaccesService,
+              private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
+    this.myForm=this.formBuilder.group({
+      periodeAcces: this.formBuilder.array([])
+    })
+    this.onAddPeriodeAcces();
+  }
+
+  get periodeAccesForms(){
+    return this.myForm.get('periodeAcces') as FormArray
+  }
+
+  public onValider(myform: FormGroup): void {
+    console.log(this.myForm.value);
+  }
+
+  onAddPeriodeAcces(){
+    const periodeAcces = this.formBuilder.group({
+      jour: [],
+      heureDebut: [],
+      heureFin: []
+    })
+    this.periodeAccesForms.push(periodeAcces);
+  }
+
+  onRemovePeriodeAcces(index){
+    this.periodeAccesForms.removeAt(index)
+  }
+
+
+  onAddAcces(addForm:NgForm): void{
+    document.getElementById('closebutton').click();
+    this.periodeaccesService.addPeriodeAcces(addForm.value).subscribe(
+      (response: PeriodeAcces) => {
+             
+      },
+      (error: HttpErrorResponse) => {
+          alert(error.message);
+      }
+    );
   }
 
 }

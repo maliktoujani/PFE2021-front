@@ -1,0 +1,86 @@
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  <mat-vertical-stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+
+        <ng-template matStepLabel>Ajouter un contrat</ng-template>
+        <mat-form-field>
+            <mat-label>Titre</mat-label>
+            <input matInput formControlName="title" placeholder="Ex. Contrat C1" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Date début</mat-label>
+            <input matInput formControlName="dateDebut" placeholder="DD-MM-YYYY" [matDatepicker]="picker" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Date fin</mat-label>
+            <input matInput formControlName="dateFin" placeholder="DD-MM-YYYY" [matDatepicker]="picker2" required>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Solution partenaire</mat-label>
+            <mat-select formControlName="solutionPartenaire" required>
+                <mat-option *ngFor="let solution of solutions" [value]="solution">
+                    {{solution.username}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="label" placeholder="Label">
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Ajouter accés</ng-template>
+
+                <div formArrayName="infoAcces">
+                    <div *ngFor="let obj of infoAccesForms.controls; let i=index" [formGroupName]="i" fxLayout="row" fxLayoutAlign="space-around center">
+                        
+                            <mat-form-field>
+                                <mat-label>Web service</mat-label>
+                                <mat-select formControlName="webService" required>
+                                    <mat-option *ngFor="let webservice of webservices" [value]="webservice">
+                                        {{webservice.url}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                                                    
+                            <mat-form-field>
+                                <input matInput formControlName="commentaire" placeholder="Commentaire">
+                            </mat-form-field>
+                            
+                            <button mat-stroked-button color="primary" (click)="openDialogAcces()">Détails</button>
+                            
+                            <button mat-icon-button color="primary" (click)="onRemoveInfoAcces(i)"><mat-icon>delete</mat-icon></button>
+                    
+                    </div>
+                </div>
+                <div fxLayoutAlign="center">
+                    <button mat-button color="primary" (click)="onAddInfoAcces()">Ajouter un accés</button>
+                </div>        
+        
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>

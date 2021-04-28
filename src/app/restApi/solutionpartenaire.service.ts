@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Contrat } from './contrat.service';
 
 export interface SolutionPartenaire {
-  id:string;
+  id:number;
   username:string;
   password:string;
   email:string;
