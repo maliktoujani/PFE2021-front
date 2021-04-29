@@ -32,6 +32,13 @@ export class PeriodeaccesService {
     return this.http.post<PeriodeAcces>(`${this.apiServerUrl}/add`,periodeacces,{headers});
   }
 
+  public addlistPeriodeAccesWithInfoAcces(periodeacces:PeriodeAcces[], infoAccesId:number): Observable<PeriodeAcces>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.post<PeriodeAcces>(`${this.apiServerUrl}/addlistPeriodeAccesWithInfoAcces/${infoAccesId}`,periodeacces,{headers});
+  }
+
   public updatePeriodeAcces(periodeacces:PeriodeAcces): Observable<PeriodeAcces>{
     return this.http.put<PeriodeAcces>(`${this.apiServerUrl}/update`,periodeacces);
   }

@@ -42,4 +42,11 @@ export class InfoaccesService {
     return this.http.delete<void>(`${this.apiServerUrl}/delete/${infoaccesId}`);
   }
 
+  public addInfoAccesWithContrat(infoacces:InfoAcces, contratId:number): Observable<InfoAcces>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.post<InfoAcces>(`${this.apiServerUrl}/addinfoacceswithcontrat/${contratId}`,infoacces,{headers});
+  }
+
 }

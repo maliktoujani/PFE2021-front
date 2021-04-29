@@ -1,13 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DialogaccesComponent } from 'src/app/dialog/dialogacces/dialogacces.component';
 import { Contrat, ContratService } from 'src/app/restApi/contrat.service';
 import { InfoAcces, InfoaccesService } from 'src/app/restApi/infoacces.service';
+import { PeriodeAcces, PeriodeaccesService } from 'src/app/restApi/periodeacces.service';
 import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
 import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+
+export interface day {
+  name: string;
+  value: string;
+}
 
 @Component({
   selector: 'app-test',
@@ -16,53 +20,61 @@ import { WebService, WebserviceService } from 'src/app/restApi/webservice.servic
 })
 
 export class TestComponent implements OnInit {
- 
-  isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
 
-  constructor(private solutionpartenaireService: SolutionPartenaireService, 
-    private contratService:ContratService, 
-    private webServiceService:WebserviceService, 
-    private infoAccesService:InfoaccesService,
-    private dialog:MatDialog,
-    private formBuilder:FormBuilder,
-    private snackBar: MatSnackBar) { }
-
-  ngOnInit() {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-
-    this.getSolutions(); 
-    this.getWebServices();
-
-    this.myForm=this.formBuilder.group({
-      title:'',
-      dateDebut:'',
-      dateFin:'',
-      solutionPartenaire:'',
-      label:'',
-      infoAcces: this.formBuilder.array([])
-    })
-    
-    this.onAddInfoAcces();
-  }
+  days: day[] = [
+    {name: 'Lundi', value: 'MONDAY'},
+    {name: 'Mardi', value: 'TUESDAY'},
+    {name: 'Mercredi', value: 'WEDNESDAY'},
+    {name: 'Jeudi', value: 'THURSDAY'},
+    {name: 'Vendredi', value: 'FRIDAY'},
+    {name: 'Samedi', value: 'SATURDAY'},
+    {name: 'Dimanche', value: 'SUNDAY'}
+  ]
 
   solutions:SolutionPartenaire[];
   webservices:WebService[];
   
-  infoAcces=new InfoAcces();
+  newContrat:Contrat;
+  newInfoAcces:InfoAcces;
 
-  myForm:FormGroup;
+  periodeAccesForm:FormGroup;
+  contratForm:FormGroup;
+  infoAccesForm:FormGroup;
+
+  constructor(private solutionpartenaireService: SolutionPartenaireService, 
+              private contratService:ContratService, 
+              private webServiceService:WebserviceService, 
+              private infoAccesService:InfoaccesService,
+              private periodeAccesService:PeriodeaccesService,
+              private formBuilder:FormBuilder,
+              private snackBar: MatSnackBar) { }
 
 
-  get infoAccesForms(){
-    return this.myForm.get('infoAcces') as FormArray
+
+  ngOnInit(){
+    this.getSolutions(); 
+    this.getWebServices();
+
+    this.contratForm=this.formBuilder.group({
+      title:['', [Validators.required]],
+      dateDebut:['', [Validators.required]],
+      dateFin:['', [Validators.required]],
+      solutionPartenaire:['', [Validators.required]],
+      label:['']
+    })
+    
+    this.infoAccesForm=this.formBuilder.group({
+      webService:['', [Validators.required]],
+    })
+
+    this.periodeAccesForm=this.formBuilder.group({
+      periodeAcces: this.formBuilder.array([])
+    })
+
+    this.onAddPeriodeAcces();
+
   }
+
 
   public getSolutions(){
     this.solutionpartenaireService.getAllSolutions().subscribe(
@@ -86,22 +98,14 @@ export class TestComponent implements OnInit {
     );
   }
 
-  openDialogAcces(){
-    this.dialog.open(DialogaccesComponent);
-  }
-
-  public onValider(): void {
-    this.AddContrat(this.myForm)
-    console.log(this.myForm.value); 
-  }
-
-  AddContrat(addForm: FormGroup){
-    this.contratService.addContrat(addForm.value).subscribe(
+  addContrat(){
+    this.contratService.addContrat(this.contratForm.value).subscribe(
       (response: Contrat) => {
+        this.newContrat=response;
         this.openSnackBar('Contrat ajouté avec succées.'); 
       },
       (error: HttpErrorResponse) => {
-        this.openSnackBar('Veuillez ajouter un contrat !');        
+        this.openSnackBar('Veuillez ajouter un contrat !');
       }
     );
   }
@@ -117,24 +121,57 @@ export class TestComponent implements OnInit {
     )
   }
 
-  onAddInfoAcces(){
-    const infoAcces = this.formBuilder.group({
-      commentaire: [],
-      webService: [],
-      contrat: [],
-      periodeAcces: this.formBuilder.array([])
+  get periodeAccesForms(){
+    return this.periodeAccesForm.get('periodeAcces') as FormArray
+  }
+
+  onAddPeriodeAcces(){
+    const periodeAcces = this.formBuilder.group({
+      jour: ['', [Validators.required]],
+      heureDebut: ['', [Validators.required, Validators.max(23), Validators.min(0)]],
+      heureFin: ['', [Validators.required, Validators.max(23), Validators.min(0)]]
     })
-    this.infoAccesForms.push(infoAcces);
+    this.periodeAccesForms.push(periodeAcces);
   }
 
-  onRemoveInfoAcces(index){
-    this.infoAccesForms.removeAt(index)
+  onRemovePeriodeAcces(index){
+    this.periodeAccesForms.removeAt(index)
   }
 
+  onTerminer(){
+    this.addInfoAccesWithContrat();
+  }
+
+
+  public addListPeriodeAccesWithInfoAcces(): void {
+    this.periodeAccesService.addlistPeriodeAccesWithInfoAcces(this.periodeAccesForm.controls['periodeAcces'].value, this.newInfoAcces.id).subscribe(
+      (response: PeriodeAcces) => {
+        this.ngOnInit();
+        this.openSnackBar('Accés ajouté avec succées.'); 
+      },
+      (error: HttpErrorResponse) => {
+          alert(error.message);
+          this.openSnackBar('Veuillez ajouter un accés !');
+      }
+    );
+  } 
+
+
+  public addInfoAccesWithContrat(): void {
+    this.infoAccesService.addInfoAccesWithContrat(this.infoAccesForm.value, this.newContrat.id).subscribe(
+      (response: InfoAcces) => {
+        this.newInfoAcces=response; 
+        this.addListPeriodeAccesWithInfoAcces();       
+      },
+      (error: HttpErrorResponse) => {
+          alert(error.message);
+          this.openSnackBar('Veuillez ajouter un accés !');
+      }
+    );
+  }
+  
   openSnackBar(message, action?) {
     let snackbarref = this.snackBar.open(message, action, {duration:2500});
   }
 
-  
 }
-
