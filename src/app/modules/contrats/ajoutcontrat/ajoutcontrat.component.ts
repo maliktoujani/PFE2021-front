@@ -135,7 +135,7 @@ export class AjoutcontratComponent implements OnInit{
     this.periodeAccesForms.removeAt(index)
   }
 
-  onTerminer(){
+  onAjouter(){
     this.addInfoAccesWithContrat();
   }
 

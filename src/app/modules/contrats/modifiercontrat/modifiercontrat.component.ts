@@ -1,57 +1,27 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogaccesComponent } from 'src/app/dialog/dialogacces/dialogacces.component';
-import { DialogsuppComponent } from 'src/app/dialog/dialogsupp/dialogsupp.component';
+import { DialogeditcontratComponent } from 'src/app/dialog/dialogeditcontrat/dialogeditcontrat.component';
+import { DialogsuppcontratComponent } from 'src/app/dialog/dialogsuppcontrat/dialogsuppcontrat.component';
 import { Contrat, ContratService } from 'src/app/restApi/contrat.service';
-
-interface objet {
-  value: string;
-  viewValue: string;
-}
-
-export interface PeriodicElement {
-  contrat: string;
-  position: number;
-  details: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, contrat: 'Contrat C1', details:'1'},
-];
 
 @Component({
   selector: 'app-modifiercontrat',
   templateUrl: './modifiercontrat.component.html',
   styleUrls: ['./modifiercontrat.component.scss']
 })
-export class ModifiercontratComponent {
+export class ModifiercontratComponent implements OnInit {
 
-  WS: objet[] = [
-    {value: 'Web service 1', viewValue: 'Web service 1'},
-    {value: 'Web service 2', viewValue: 'Web service 2'},
-    {value: 'Web service 3', viewValue: 'Web service 3'}
-  ];
+  constructor(private contratService: ContratService, private dialog?:MatDialog){}
 
-  solution: objet[] = [
-    {value: 'Solution partenaire 1', viewValue: 'Solution partenaire 1'},
-    {value: 'Solution partenaire 2', viewValue: 'Solution partenaire 2'},
-    {value: 'Solution partenaire 3', viewValue: 'Solution partenaire 3'}
-  ];
-
-  displayedColumns: string[] = ['position', 'contrat','details'];
-  dataSource = ELEMENT_DATA;
-  
-  public contrats: Contrat[];
-
-  constructor(public dialog:MatDialog, public contratService: ContratService) { }
-
+  displayedColumns= ["title", "dateDebut", "dateFin", "solutionPartenaire", "label", "actions"];
+  contrats:Contrat[];
 
   ngOnInit(){
-    this.getContrats();
-   }
+    this.getContrats(); 
+  }
 
-  public getContrats(): void{
+  public getContrats(){
     this.contratService.getAllContrats().subscribe(
       (response: Contrat[]) => {
         this.contrats=response;
@@ -62,12 +32,38 @@ export class ModifiercontratComponent {
       );
   }
 
-  openDialogAcces(){
-    this.dialog.open(DialogaccesComponent);
+  openDialogEdit(element:Contrat){
+    this.dialog.open(DialogeditcontratComponent,{
+      data:{
+        id:element.id,
+        title:element.title,
+        dateDebut:element.dateDebut,
+        dateFin:element.dateFin,
+        label:element.label,
+        solutionPartenaire:element.solutionPartenaire
+      }
+    });
   }
 
-  openDialogSupp(){
-    this.dialog.open(DialogsuppComponent);
+  openDialogSupp(id:string){
+    this.dialog.open(DialogsuppcontratComponent,{
+      data:{
+        id:id
+      }
+    });
   }
 
+  public searchContrats(key:string):void{
+    const results:Contrat[]=[];
+    for(const contrat of this.contrats){
+      if(contrat.title.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+         contrat.label.toLowerCase().indexOf(key.toLowerCase()) !== -1){
+         results.push(contrat);
+      }
+    }
+    this.contrats=results;
+    if(results.length === 0 || !key){
+      this.getContrats();
+    }
+  }
 }

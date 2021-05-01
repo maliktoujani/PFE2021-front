@@ -1,17 +1,19 @@
 <h2 mat-dialog-title>Ajouter une solution partenaire</h2>
 
-<form #addForm="ngForm" (ngSubmit)="onAddSolutionPartenaire(addForm)">
+<form [formGroup]="myForm">
     <ul>
-        <li><mat-form-field><mat-label>Username</mat-label><input matInput ngModel name="username" required></mat-form-field></li>
-        <li><mat-form-field><mat-label>Email</mat-label><input matInput type="email" ngModel name="email" placeholder="Ex. sol@example.com" required></mat-form-field></li>
-        <li><mat-form-field><mat-label>Tel/Fax</mat-label><input matInput ngModel name="phone" placeholder="+216"></mat-form-field></li>
-        <li><mat-form-field><input matInput type="password" ngModel name="password" placeholder="Mot de passe" required></mat-form-field></li>
+        <li><mat-form-field><mat-label>Username</mat-label><input matInput formControlName="username" required></mat-form-field></li>
+        <li><mat-form-field><mat-label>Email</mat-label><input matInput formControlName="email" placeholder="Ex. sol@example.com" required></mat-form-field></li>
+        <li><mat-form-field><mat-label>Tel/Fax</mat-label><input matInput formControlName="phone" placeholder="+216"></mat-form-field></li>
+        <li><mat-form-field><input matInput type="password" formControlName="password" placeholder="Mot de passe" required></mat-form-field></li>
     </ul>
-    <div fxLayout="row" fxLayoutAlign="center center">
-        <button mat-button type="submit" [disabled]="addForm.invalid">Valider</button>
-        <button mat-button id="closebutton" mat-dialog-close>Annuler</button>
-    </div>
 </form>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+    <button mat-button type="submit" (click)="addSolutionPartenaire()" [disabled]="myForm.invalid">Valider</button>
+    <button mat-button id="closebutton" mat-dialog-close>Annuler</button>
+</div>
+
 
 
 

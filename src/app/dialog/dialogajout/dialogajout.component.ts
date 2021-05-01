@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
 
 @Component({
@@ -10,13 +10,23 @@ import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/s
 })
 export class DialogajoutComponent implements OnInit {
 
-  constructor(public solutionpartenaireService: SolutionPartenaireService) { }
+  myForm: FormGroup;
 
-  ngOnInit(){}
+  constructor(private solutionpartenaireService: SolutionPartenaireService,
+              private formBuilder: FormBuilder) { }
 
-  public onAddSolutionPartenaire(addForm: NgForm): void {
+  ngOnInit(){
+    this.myForm=this.formBuilder.group({
+      username:['', [Validators.required]],
+      email:['', [Validators.required, Validators.email]],
+      phone:[''],
+      password:['', [Validators.required]]
+    })
+  }
+
+  public addSolutionPartenaire(): void {
     document.getElementById('closebutton').click();
-    this.solutionpartenaireService.addSolutionPartenaire(addForm.value).subscribe(
+    this.solutionpartenaireService.addSolutionPartenaire(this.myForm.value).subscribe(
       (response: SolutionPartenaire) => {
         
       },

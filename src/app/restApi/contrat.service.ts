@@ -36,10 +36,16 @@ export class ContratService {
   }
 
   public updateContrat(contrat: Contrat): Observable<Contrat>{
-    return this.http.put<Contrat>(`${this.apiServerUrl}/update`,contrat);
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.put<Contrat>(`${this.apiServerUrl}/update`,contrat,{headers});
   }
 
   public deleteContrat(contratId: string): Observable<void>{
-    return this.http.delete<void>(`${this.apiServerUrl}/delete/${contratId}`);
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${contratId}`,{headers});
   }
 }

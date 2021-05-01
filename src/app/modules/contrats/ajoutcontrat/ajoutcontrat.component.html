@@ -12,17 +12,15 @@
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Date début</mat-label>
-                <input matInput placeholder="DD-MM-YYYY" [matDatepicker]="picker" formControlName="dateDebut" required>
+                <mat-label>Periode du contrat</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate formControlName="dateDebut" placeholder="Date début" required>
+                  <input matEndDate formControlName="dateFin" placeholder="Date fin" required>
+                </mat-date-range-input>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Date fin</mat-label>
-                <input matInput placeholder="DD-MM-YYYY" [matDatepicker]="picker2" formControlName="dateFin" required>
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+                <mat-error *ngIf="contratForm.controls.dateDebut.hasError('matStartDateInvalid')">Date début invalide</mat-error>
+                <mat-error *ngIf="contratForm.controls.dateFin.hasError('matEndDateInvalid')">Date fin invalide</mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -37,7 +35,7 @@
             <mat-form-field><input matInput placeholder="Label" formControlName="label"></mat-form-field>
             </div>
 
-        <button mat-raised-button type="submit" color="primary"  (click)="addContrat()" [disabled]="contratForm.invalid" matStepperNext>Valider</button>
+        <button mat-raised-button type="submit" color="primary" (click)="addContrat()" [disabled]="contratForm.invalid" matStepperNext>Valider</button>
         <button mat-button type="reset">Annuler</button>
 
         </form>
@@ -89,15 +87,16 @@
               <button mat-icon-button color="primary"><mat-icon (click)="onAddPeriodeAcces()">add_circle_outline</mat-icon></button>
             </div>
 
-            <button mat-raised-button type="submit" color="primary"  (click)="onTerminer()" [disabled]="periodeAccesForm.invalid || infoAccesForm.invalid">Ajouter nouveau accés</button>
+            <button mat-raised-button type="submit" color="primary"  (click)="onAjouter()" [disabled]="periodeAccesForm.invalid || infoAccesForm.invalid">Ajouter l'accés</button>
             <button mat-button (click)="ngOnInit()">Annuler</button>
 
           </div>
         </form>
         <br>
-        <button mat-button type="submit" color="primary" (click)="onTerminer()" matStepperNext>Terminer</button>
+        <mat-divider></mat-divider>
+        <br>
+        <button mat-button type="submit" color="primary" [disabled]="newInfoAcces==null" matStepperNext>Terminer</button>
     </mat-step>
-
 
     <mat-step label="Imprimer le contrat" optional>
         <p>Imprimer le contrat</p>
