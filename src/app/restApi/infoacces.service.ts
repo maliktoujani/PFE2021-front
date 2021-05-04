@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Contrat } from './contrat.service';
+import { PeriodeAcces } from './periodeacces.service';
 import { WebService } from './webservice.service';
 
 export class InfoAcces {
@@ -10,6 +11,7 @@ export class InfoAcces {
   commentaire:string;
   contrat:Contrat;
   webService:WebService;
+  periodeAcces:PeriodeAcces[];
 }
 
 @Injectable({
@@ -40,6 +42,13 @@ export class InfoaccesService {
 
   public deleteInfoAcces(infoaccesId: string): Observable<void>{
     return this.http.delete<void>(`${this.apiServerUrl}/delete/${infoaccesId}`);
+  }
+
+  public getInfoAccesById(infoaccesId: string): Observable<InfoAcces>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<InfoAcces>(`${this.apiServerUrl}/find/${infoaccesId}`,{headers});
   }
 
   public addInfoAccesWithContrat(infoacces:InfoAcces, contratId:number): Observable<InfoAcces>{

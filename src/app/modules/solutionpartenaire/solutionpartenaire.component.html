@@ -6,7 +6,7 @@
   <input matInput type="search" (ngModelChange)="searchSolutions(key.value)" #key="ngModel" ngModel name="key" placeholder="Ex. ium" #input>
 </mat-form-field>
 
-<table mat-table [dataSource]="solutions" class="mat-elevation-z8">
+<table mat-table [dataSource]="solutions" class="mat-elevation-z2">
 
   <ng-container matColumnDef="username">
     <th mat-header-cell *matHeaderCellDef> Nom d'utilisateur </th>

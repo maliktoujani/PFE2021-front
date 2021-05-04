@@ -1,11 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Contrat, ContratService } from 'src/app/restApi/contrat.service';
 import { InfoAcces, InfoaccesService } from 'src/app/restApi/infoacces.service';
 import { PeriodeAcces, PeriodeaccesService } from 'src/app/restApi/periodeacces.service';
-import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
 import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
 
 export interface day {
@@ -14,11 +13,11 @@ export interface day {
 }
 
 @Component({
-  selector: 'app-ajoutcontrat',
-  templateUrl: './ajoutcontrat.component.html',
-  styleUrls: ['./ajoutcontrat.component.scss']
+  selector: 'app-dialogaddinfoacces',
+  templateUrl: './dialogaddinfoacces.component.html',
+  styleUrls: ['./dialogaddinfoacces.component.scss']
 })
-export class AjoutcontratComponent implements OnInit{
+export class DialogaddinfoaccesComponent implements OnInit {
 
   days: day[] = [
     {name: 'Lundi', value: 'MONDAY'},
@@ -30,36 +29,25 @@ export class AjoutcontratComponent implements OnInit{
     {name: 'Dimanche', value: 'SUNDAY'}
   ]
 
-  solutions:SolutionPartenaire[];
-  webservices:WebService[];
-  
-  newContrat:Contrat;
   newInfoAcces:InfoAcces;
 
+  infoAcces:InfoAcces;
+  myForm:FormGroup;
+  webservices:WebService[];
   periodeAccesForm:FormGroup;
-  contratForm:FormGroup;
   infoAccesForm:FormGroup;
 
-  constructor(private solutionpartenaireService: SolutionPartenaireService, 
-              private contratService:ContratService, 
+  constructor(@Inject(MAT_DIALOG_DATA) private data,
+              private formBuilder: FormBuilder,
               private webServiceService:WebserviceService, 
               private infoAccesService:InfoaccesService,
               private periodeAccesService:PeriodeaccesService,
-              private formBuilder:FormBuilder,
               private snackBar: MatSnackBar) { }
-
-  ngOnInit(){
-    this.getSolutions(); 
+  
+  ngOnInit(): void {
+        
     this.getWebServices();
 
-    this.contratForm=this.formBuilder.group({
-      title:['', [Validators.required]],
-      dateDebut:['', [Validators.required]],
-      dateFin:['', [Validators.required]],
-      solutionPartenaire:['', [Validators.required]],
-      label:['']
-    })
-    
     this.infoAccesForm=this.formBuilder.group({
       webService:['', [Validators.required]],
     })
@@ -69,19 +57,6 @@ export class AjoutcontratComponent implements OnInit{
     })
 
     this.onAddPeriodeAcces();
-
-  }
-
-
-  public getSolutions(){
-    this.solutionpartenaireService.getAllSolutions().subscribe(
-      (response: SolutionPartenaire[]) => {
-        this.solutions=response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-      );
   }
 
   public getWebServices(): void {
@@ -91,18 +66,6 @@ export class AjoutcontratComponent implements OnInit{
       },
       (error: HttpErrorResponse) => {
           alert(error.message);
-      }
-    );
-  }
-
-  addContrat(){
-    this.contratService.addContrat(this.contratForm.value).subscribe(
-      (response: Contrat) => {
-        this.newContrat=response;
-        this.openSnackBar('Contrat ajouté avec succées.'); 
-      },
-      (error: HttpErrorResponse) => {
-        this.openSnackBar('Veuillez ajouter un contrat !');
       }
     );
   }
@@ -124,15 +87,10 @@ export class AjoutcontratComponent implements OnInit{
     this.periodeAccesForms.removeAt(index)
   }
 
-  onAjouter(){
-    this.addInfoAccesWithContrat();
-  }
-
-
+  
   public addListPeriodeAccesWithInfoAcces(): void {
     this.periodeAccesService.addlistPeriodeAccesWithInfoAcces(this.periodeAccesForm.controls['periodeAcces'].value, this.newInfoAcces.id).subscribe(
       (response: PeriodeAcces) => {
-        this.ngOnInit();
         this.openSnackBar('Accés ajouté avec succées.'); 
       },
       (error: HttpErrorResponse) => {
@@ -144,7 +102,8 @@ export class AjoutcontratComponent implements OnInit{
 
 
   public addInfoAccesWithContrat(): void {
-    this.infoAccesService.addInfoAccesWithContrat(this.infoAccesForm.value, this.newContrat.id).subscribe(
+    document.getElementById('closebutton').click();
+    this.infoAccesService.addInfoAccesWithContrat(this.infoAccesForm.value, this.data.id).subscribe(
       (response: InfoAcces) => {
         this.newInfoAcces=response; 
         this.addListPeriodeAccesWithInfoAcces();       
@@ -158,6 +117,10 @@ export class AjoutcontratComponent implements OnInit{
   
   openSnackBar(message, action?) {
     let snackbarref = this.snackBar.open(message, action, {duration:2500});
+  }
+
+  onAjouter(){
+    this.addInfoAccesWithContrat();
   }
 
 }

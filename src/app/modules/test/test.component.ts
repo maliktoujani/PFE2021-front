@@ -1,9 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogeditcontratComponent } from 'src/app/dialog/dialogeditcontrat/dialogeditcontrat.component';
-import { DialogsuppcontratComponent } from 'src/app/dialog/dialogsuppcontrat/dialogsuppcontrat.component';
-import { Contrat, ContratService } from 'src/app/restApi/contrat.service';
+import { HistoriqueAppel, HistoriqueappelService } from 'src/app/restApi/historiqueappel.service';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-test',
@@ -11,60 +9,70 @@ import { Contrat, ContratService } from 'src/app/restApi/contrat.service';
   styleUrls: ['./test.component.scss']
 })
 
-export class TestComponent implements OnInit {
+export class TestComponent implements OnInit{
 
-  constructor(private contratService: ContratService, private dialog?:MatDialog){}
+  chart = [];
+  historiqueAppel:HistoriqueAppel[];
 
-  displayedColumns= ["title", "dateDebut", "dateFin", "solutionPartenaire", "label", "actions"];
-  contrats:Contrat[];
+  constructor(private historiqueappelService: HistoriqueappelService){}
 
   ngOnInit(){
-    this.getContrats(); 
+    this.getHistoriqueAppel()
+
+
+
+    this.chart = new Chart('canvas', {
+      type: 'line',
+      data: {
+        labels: weatherDates,
+        datasets: [
+          { 
+            data: temp_max,
+            borderColor: "#3cba9f",
+            fill: false
+          },
+          { 
+            data: temp_min,
+            borderColor: "#ffcc00",
+            fill: false
+          },
+        ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            display: true
+          }],
+          yAxes: [{
+            display: true
+          }],
+        }
+      }
+    });
+
+
+
+
   }
 
-  public getContrats(){
-    this.contratService.getAllContrats().subscribe(
-      (response: Contrat[]) => {
-        this.contrats=response;
+  public getHistoriqueAppel(): void {
+    this.historiqueappelService.getAllHistoriqueAppel().subscribe(
+      (response: HistoriqueAppel[]) => {
+          this.historiqueAppel=response;        
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+          alert(error.message);
       }
-      );
+    );
   }
 
-  openDialogEdit(element:Contrat){
-    this.dialog.open(DialogeditcontratComponent,{
-      data:{
-        id:element.id,
-        title:element.title,
-        dateDebut:element.dateDebut,
-        dateFin:element.dateFin,
-        label:element.label,
-        solutionPartenaire:element.solutionPartenaire
-      }
-    });
-  }
 
-  openDialogSupp(id:string){
-    this.dialog.open(DialogsuppcontratComponent,{
-      data:{
-        id:id
-      }
-    });
-  }
+  
 
-  public searchContrats(key:string):void{
-    const results:Contrat[]=[];
-    for(const contrat of this.contrats){
-      if(contrat.title.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-         contrat.label.toLowerCase().indexOf(key.toLowerCase()) !== -1){
-         results.push(contrat);
-      }
-    }
-    this.contrats=results;
-    if(results.length === 0 || !key){
-      this.getContrats();
-    }
-  }
+
+
+
 }

@@ -69,7 +69,7 @@ export class SolutionpartenaireComponent implements OnInit{
       }
     }
     this.solutions=results;
-    if(results.length === 0 || !key){
+    if(!key){
       this.getSolutions();
     }
   }
