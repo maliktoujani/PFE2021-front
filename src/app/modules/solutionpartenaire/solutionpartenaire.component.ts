@@ -52,7 +52,6 @@ export class SolutionpartenaireComponent implements OnInit{
   }
 
   openDialogSupp(id:string){
-    console.log(id);
     this.dialog.open(DialogsuppComponent,{
       data:{
         id:id

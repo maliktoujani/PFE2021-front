@@ -2,12 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { HistoriqueAppel } from './historiqueappel.service';
 
 export interface WebService {
   id:number;
   url:string;
   format:string;
   methodeHttp:string;
+  historiqueAppels:HistoriqueAppel[];
 }
 
 @Injectable({

@@ -41,6 +41,7 @@ import { DialogeditcontratComponent } from 'src/app/dialog/dialogeditcontrat/dia
 import { DialogeditinfoaccesComponent } from 'src/app/dialog/dialogeditinfoacces/dialogeditinfoacces.component';
 import { DialogaddinfoaccesComponent } from 'src/app/dialog/dialogaddinfoacces/dialogaddinfoacces.component';
 import { DialogsuppinfoaccesComponent } from 'src/app/dialog/dialogsuppinfoacces/dialogsuppinfoacces.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { DialogsuppinfoaccesComponent } from 'src/app/dialog/dialogsuppinfoacces
     MatPaginatorModule,
     ReactiveFormsModule,
     MatStepperModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ],
   providers: [
     DashboardService

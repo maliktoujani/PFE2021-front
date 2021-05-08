@@ -29,6 +29,27 @@ export class HistoriqueappelService {
     return this.http.get<any>(`${this.apiServerUrl}/all`,{headers});
   }
 
+  public getStatistiquePerDay(): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperday`,{headers});
+  }
+
+  public getStatistiquePerDayByWebService(webServiceId: number): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperday/${webServiceId}`,{headers});
+  }
+
+  public getTodaysAppelWebService(): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/todaysappelwebservice`,{headers});
+  }
+
   public addHistoriqueAppel(historiqueAppel: HistoriqueAppel): Observable<HistoriqueAppel>{
     let username='admin'
     let password='admin'

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Contrat } from './contrat.service';
+import { HistoriqueAppel } from './historiqueappel.service';
 
 export interface SolutionPartenaire {
   id:number;
@@ -11,6 +12,7 @@ export interface SolutionPartenaire {
   email:string;
   phone:Number;
   contrats:Contrat[];
+  historiqueAppels:HistoriqueAppel[];
 }
 
 @Injectable({
