@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { SolutionPartenaire } from './solutionpartenaire.service';
 
 export interface Contrat {
-  id:string;
+  id:number;
   title:string;
   dateDebut:Date;
   dateFin:Date;
@@ -29,14 +29,23 @@ export class ContratService {
   }
 
   public addContrat(contrat: Contrat): Observable<Contrat>{
-    return this.http.post<Contrat>(`${this.apiServerUrl}/add`,contrat);
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.post<Contrat>(`${this.apiServerUrl}/add`,contrat,{headers});
   }
 
   public updateContrat(contrat: Contrat): Observable<Contrat>{
-    return this.http.put<Contrat>(`${this.apiServerUrl}/update`,contrat);
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.put<Contrat>(`${this.apiServerUrl}/update`,contrat,{headers});
   }
 
   public deleteContrat(contratId: string): Observable<void>{
-    return this.http.delete<void>(`${this.apiServerUrl}/delete/${contratId}`);
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${contratId}`,{headers});
   }
 }

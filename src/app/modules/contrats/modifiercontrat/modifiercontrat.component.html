@@ -1,90 +1,83 @@
-<h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Modifier un contrat</h2>
+<h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Gestion des contrats</h2>
+<br>
 
-<div>
-    <ul fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
-        <li>
-            <mat-form-field><input matInput placeholder="Rechercher"></mat-form-field>
+<mat-form-field fxLayout="column-reverse">
+  <mat-label>Recherche</mat-label>
+    <input matInput type="search" (ngModelChange)="searchContrats(key.value)" #key="ngModel" ngModel name="key" placeholder="Ex. ium" #input>
+</mat-form-field>
 
-            <mat-selection-list [multiple]="false">
-                <mat-list-option *ngFor="let contrat of contrats">
-                    {{contrat?.label}}
-                </mat-list-option>
-            </mat-selection-list>
-        </li>
-        <li fxLayout="column">
-            <mat-form-field><input matInput placeholder="Titre"></mat-form-field>
-            <mat-form-field>
-                <mat-label>Solution partenaire</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let SP of solution" [value]="SP.value">
-                    {{SP.viewValue}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </li>
-        <li fxLayout="column">
-            <mat-form-field>
-                <mat-label>Date début</mat-label>
-                <input matInput placeholder="YYYY-MM-DD" [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <button mat-stroked-button color="primary" (click)="openDialogSupp()">Supprimer le contrat</button>
-        </li>
-        <li>
-            <mat-form-field>
-                <mat-label>Date fin</mat-label>
-                <input matInput placeholder="YYYY-MM-DD" [matDatepicker]="picker2">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-        </li>
-    </ul>
+<table mat-table [dataSource]="contrats" multiTemplateDataRows class="mat-elevation-z2">
 
-    <ul fxLayout="column">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Titre </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
 
-            <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> Web service </th>
-                <td mat-cell *matCellDef="let element">
-                    <mat-form-field>
-                        <mat-label>Web service</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let webservice of WS" [value]="webservice.value">
-                            {{webservice.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </td>
-            </ng-container>
-            
-            <ng-container matColumnDef="contrat">
-                <th mat-header-cell *matHeaderCellDef> Commentaire </th>
-                <td mat-cell *matCellDef="let element">
-                    <mat-form-field><input matInput placeholder="Commentaire"></mat-form-field>
-                </td>
-            </ng-container>
 
-            <ng-container matColumnDef="details">
-                <th mat-header-cell *matHeaderCellDef> Détails </th>
-                <td mat-cell *matCellDef="let element">
-                    <button mat-stroked-button color="primary" (click)="openDialogAcces()">...</button>    
-                </td>
-            </ng-container>
-            
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </ul>
-    <ul fxLayoutAlign="center">
-        <button mat-button color="primary">Ajouter un accés</button>
-    </ul>
+  <ng-container matColumnDef="dateDebut">
+    <th mat-header-cell *matHeaderCellDef> Date début </th>
+    <td mat-cell *matCellDef="let element"> {{element.dateDebut}} </td>
+  </ng-container>
 
-    <mat-divider></mat-divider>
+  <ng-container matColumnDef="dateFin">
+    <th mat-header-cell *matHeaderCellDef> Date fin </th>
+    <td mat-cell *matCellDef="let element"> {{element.dateFin}} </td>
+  </ng-container>
 
-    <ul fxLayoutAlign="center">
-        <button mat-raised-button color="primary">Valider</button>
-        <button mat-button color="primary">Annuler</button>
-    </ul>
 
-</div>
+  <ng-container matColumnDef="label">
+    <th mat-header-cell *matHeaderCellDef> Label </th>
+    <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="solutionPartenaire">
+    <th mat-header-cell *matHeaderCellDef> Solution partenaire </th>
+    <td mat-cell *matCellDef="let element"> {{element.solutionPartenaire.username}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" (click)="openDialogEdit(element)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button color="primary" (click)="openDialogSupp(element.id)"><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button color="primary" (click)="element.isExpanded = !element.isExpanded"><mat-icon>info_outlined</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+
+        <div class="student-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
+            <mat-list>
+                <mat-list-item mat-subheader>Détails du contrat : {{element.title}}</mat-list-item>
+                <mat-list-item mat-subheader>Période du contrat : {{element.dateDebut}} - {{element.dateFin}}</mat-list-item>
+                <mat-list-item mat-subheader>Solution partenaire : {{element.solutionPartenaire.username}}</mat-list-item>
+                <mat-list-item mat-subheader>Label : {{element.label}}</mat-list-item>
+                <mat-list-item mat-subheader>Accés : <button mat-icon-button color="primary" (click)="onDialogAddInfoAcces(element.id)"><mat-icon>add_circle_outline</mat-icon></button></mat-list-item>
+                  <mat-list>
+                    <div *ngFor="let infoAcces of element.infoAcces">
+                        <div mat-subheader> Web service : {{infoAcces.webService.url}} <button mat-icon-button color="primary" (click)="openDialogSuppInfoAcces(infoAcces.id)"><mat-icon>delete_outlined</mat-icon></button></div>
+                            <div *ngFor="let periode of infoAcces.periodeAcces">
+                                <div mat-subheader> Jour : {{periode.jour}} | Heure début : {{periode.heureDebut}}h | Heure fin : {{periode.heureFin}}h</div>
+                            </div>
+                            <button mat-icon-button color="primary" (click)="onDialogEditInfoAcces(infoAcces.id)"><mat-icon>edit</mat-icon></button>
+                            <mat-divider></mat-divider>
+                    </div>
+                  </mat-list>
+            </mat-list>
+        </div>
+
+    </td>
+  </ng-container>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">Aucun contrat trouvé.</td>
+  </tr>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+  <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="student-detail-row"></tr>
+
+</table>

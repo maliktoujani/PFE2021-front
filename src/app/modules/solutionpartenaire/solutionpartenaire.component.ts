@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogajoutComponent } from 'src/app/dialog/dialogajout/dialogajout.component';
 import { DialogeditComponent } from 'src/app/dialog/dialogedit/dialogedit.component';
 import { DialogsuppComponent } from 'src/app/dialog/dialogsupp/dialogsupp.component';
+import { Contrat } from 'src/app/restApi/contrat.service';
 import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class SolutionpartenaireComponent implements OnInit{
 
   displayedColumns= ["username", "email", "phone", "password", "actions"];
   solutions:SolutionPartenaire[];
+  contrats:Contrat[];
 
   ngOnInit(){
     this.getSolutions(); 
@@ -50,7 +52,6 @@ export class SolutionpartenaireComponent implements OnInit{
   }
 
   openDialogSupp(id:string){
-    console.log(id);
     this.dialog.open(DialogsuppComponent,{
       data:{
         id:id
@@ -67,7 +68,7 @@ export class SolutionpartenaireComponent implements OnInit{
       }
     }
     this.solutions=results;
-    if(results.length === 0 || !key){
+    if(!key){
       this.getSolutions();
     }
   }

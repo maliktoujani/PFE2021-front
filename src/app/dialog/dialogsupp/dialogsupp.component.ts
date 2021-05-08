@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
+import { SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
 
 @Component({
   selector: 'app-dialogsupp',
@@ -20,7 +20,7 @@ export class DialogsuppComponent implements OnInit {
     document.getElementById('closebutton').click();
     this.solutionpartenaireService.deleteSolutionPartenaire(this.data.id).subscribe(
       (response: void) => {
-        console.log("deleted");
+        
       },
       (error: HttpErrorResponse) => {
           alert(error.message);

@@ -1,0 +1,30 @@
+<mat-card>
+  <canvas id="canvas"></canvas>
+</mat-card>
+
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card>
+      <div>Les appels de web services d'aujourd'hui :</div>
+      <table>
+        <tr>
+          <th>Solution partenaire</th>
+          <th>Web service</th>
+          <th>Heure d'appel</th>
+          <th>Résultat d'appel</th>
+        </tr>
+      
+        <tr *ngFor="let todaysAppel of todaysAppels">
+          <td>{{todaysAppel.solutionPartenaire.username}}</td>
+          <td>{{todaysAppel.webService.url}}</td>
+          <td>{{todaysAppel.dateHeure}}</td>
+          <td>{{todaysAppel.resultat}}</td>
+        </tr>
+      </table>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+  <mat-grid-tile>4</mat-grid-tile>
+</mat-grid-list>
+

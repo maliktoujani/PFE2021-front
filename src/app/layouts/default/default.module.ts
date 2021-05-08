@@ -13,29 +13,35 @@ import { SolutionpartenaireComponent } from 'src/app/modules/solutionpartenaire/
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatTableModule} from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
 import { DialogajoutComponent } from 'src/app/dialog/dialogajout/dialogajout.component';
 import { DialogsuppComponent } from 'src/app/dialog/dialogsupp/dialogsupp.component';
 import { AjoutcontratComponent } from 'src/app/modules/contrats/ajoutcontrat/ajoutcontrat.component';
 import { ModifiercontratComponent } from 'src/app/modules/contrats/modifiercontrat/modifiercontrat.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { LoginComponent } from 'src/app/login/login.component';
 import { DialogaccesComponent } from 'src/app/dialog/dialogacces/dialogacces.component';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { WebserviceComponent } from 'src/app/modules/webservice/webservice.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DialogsettingsComponent } from 'src/app/dialog/dialogsettings/dialogsettings.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {TestComponent} from '../../modules/test/test.component';
+import { TestComponent } from '../../modules/test/test.component';
 import { DialogeditComponent } from 'src/app/dialog/dialogedit/dialogedit.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogsuppcontratComponent } from 'src/app/dialog/dialogsuppcontrat/dialogsuppcontrat.component';
+import { DialogeditcontratComponent } from 'src/app/dialog/dialogeditcontrat/dialogeditcontrat.component';
+import { DialogeditinfoaccesComponent } from 'src/app/dialog/dialogeditinfoacces/dialogeditinfoacces.component';
+import { DialogaddinfoaccesComponent } from 'src/app/dialog/dialogaddinfoacces/dialogaddinfoacces.component';
+import { DialogsuppinfoaccesComponent } from 'src/app/dialog/dialogsuppinfoacces/dialogsuppinfoacces.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -51,7 +57,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     WebserviceComponent,
     DialogsettingsComponent,
     TestComponent,
-    DialogeditComponent
+    DialogeditComponent,
+    DialogsuppcontratComponent,
+    DialogeditcontratComponent,
+    DialogeditinfoaccesComponent,
+    DialogaddinfoaccesComponent,
+    DialogsuppinfoaccesComponent
   ],
   entryComponents: [DialogajoutComponent],
   imports: [
@@ -67,7 +78,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatInputModule,
     MatButtonModule,
     MatListModule,
-    MatDialogModule,
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -76,7 +86,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatCheckboxModule,
     FormsModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatDialogModule,
+    MatGridListModule
   ],
   providers: [
     DashboardService
