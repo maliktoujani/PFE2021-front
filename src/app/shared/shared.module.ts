@@ -11,19 +11,13 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import { RouterModule } from '@angular/router';
-import { AreaComponent } from './widget/area/area.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { CardComponent } from './widget/card/card.component';
-import { PieComponent } from './widget/pie/pie.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent,
-    AreaComponent,
-    CardComponent,
-    PieComponent
+    SidebarComponent
   ],
   imports: [
     CommonModule,
@@ -40,10 +34,7 @@ import { PieComponent } from './widget/pie/pie.component';
   exports: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent,
-    AreaComponent,
-    CardComponent,
-    PieComponent
+    SidebarComponent
   ]
 })
 export class SharedModule { }

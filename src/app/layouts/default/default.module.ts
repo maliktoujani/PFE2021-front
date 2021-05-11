@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DefaultComponent } from './default.component';
-import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
-import { DashboardService } from 'src/app/modules/dashboard.service';
 import { SolutionpartenaireComponent } from 'src/app/modules/solutionpartenaire/solutionpartenaire.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -42,11 +40,17 @@ import { DialogeditinfoaccesComponent } from 'src/app/dialog/dialogeditinfoacces
 import { DialogaddinfoaccesComponent } from 'src/app/dialog/dialogaddinfoacces/dialogaddinfoacces.component';
 import { DialogsuppinfoaccesComponent } from 'src/app/dialog/dialogsuppinfoacces/dialogsuppinfoacces.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ParsolutionpartenaireComponent } from 'src/app/modules/appelswebservice/parsolutionpartenaire/parsolutionpartenaire.component';
+import { ParwebserviceComponent } from 'src/app/modules/appelswebservice/parwebservice/parwebservice.component';
+import { RapportparsolutionpartenaireComponent } from 'src/app/modules/rapportrecapitulatif/rapportparsolutionpartenaire/rapportparsolutionpartenaire.component';
+import { RapportparwebserviceComponent } from 'src/app/modules/rapportrecapitulatif/rapportparwebservice/rapportparwebservice.component';
 
 @NgModule({
   declarations: [
     DefaultComponent,
-    DashboardComponent,
     SolutionpartenaireComponent,
     DialogajoutComponent,
     DialogsuppComponent,
@@ -62,7 +66,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
     DialogeditcontratComponent,
     DialogeditinfoaccesComponent,
     DialogaddinfoaccesComponent,
-    DialogsuppinfoaccesComponent
+    DialogsuppinfoaccesComponent,
+    ParsolutionpartenaireComponent,
+    ParwebserviceComponent,
+    RapportparsolutionpartenaireComponent,
+    RapportparwebserviceComponent
   ],
   entryComponents: [DialogajoutComponent],
   imports: [
@@ -90,10 +98,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
     ReactiveFormsModule,
     MatStepperModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatExpansionModule
   ],
-  providers: [
-    DashboardService
-  ]
+  providers: []
 })
 export class DefaultModule { }

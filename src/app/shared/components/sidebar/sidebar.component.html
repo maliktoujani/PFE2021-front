@@ -19,8 +19,17 @@
     <h2 matSubheader>Web service</h2>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/home/webservice">Paramètrer les web services</a>
     <h2 matSubheader>Statistiques</h2>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/home/dashboard">Appels web service</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/home/dashboard">Rapport récapitulatif</a>
-    
+    <a mat-list-item [matMenuTriggerFor]="menu">Appels web service</a>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLinkActive="list-item-active" routerLink="/home/appelswebservice/parsolutionpartenaire">Par solution partenaire</button>
+        <button mat-menu-item routerLinkActive="list-item-active" routerLink="/home/appelswebservice/parwebservice">Par web service</button>
+        </mat-menu>
+
+    <a mat-list-item [matMenuTriggerFor]="menu2">Rapport récapitulatif</a>
+        <mat-menu #menu2="matMenu">
+        <button mat-menu-item routerLinkActive="list-item-active" routerLink="/home/rapportrecapitulatif/parsolutionpartenaire">Par solution partenaire</button>
+        <button mat-menu-item routerLinkActive="list-item-active" routerLink="/home/rapportrecapitulatif/parwebservice">Par web service</button>
+        </mat-menu>
+        
 
 </mat-nav-list>

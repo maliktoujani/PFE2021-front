@@ -1,0 +1,57 @@
+<h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Rapport récapitulatif : par web service</h2>
+
+<mat-card>
+<canvas id="canvas"></canvas>
+</mat-card>
+
+<mat-divider></mat-divider>
+
+<mat-grid-list cols="3" rowHeight="2:1">
+<mat-grid-tile>
+    <mat-card>
+    <canvas id="chartLine1"></canvas>
+    </mat-card>
+</mat-grid-tile>
+<mat-grid-tile>
+    <mat-card>
+    <canvas id="chartLine2"></canvas>
+    </mat-card>
+</mat-grid-tile>
+<mat-grid-tile> 
+    <mat-card>
+    <canvas id="chartLine3"></canvas>
+    </mat-card>
+</mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="2" rowHeight="2:1">
+<mat-grid-tile>
+    <mat-card>
+    <div>Les appels de web services d'aujourd'hui :</div>
+    <table>
+        <tr>
+        <th>Solution partenaire</th>
+        <th>Web service</th>
+        <th>Heure d'appel</th>
+        <th>Résultat d'appel</th>
+        </tr>
+    
+        <tr *ngFor="let todaysAppel of todaysAppels">
+        <td>{{todaysAppel.solutionPartenaire.username}}</td>
+        <td>{{todaysAppel.webService.url}}</td>
+        <td>{{todaysAppel.dateHeure | date:'mediumTime'}}</td>
+        <td *ngIf="todaysAppel.resultat == true; then reussi else echec"></td>
+            <ng-template #reussi>Réussi</ng-template>
+            <ng-template #echec>Echec</ng-template>
+        </tr>
+    </table>
+    </mat-card>
+</mat-grid-tile>
+<mat-grid-tile>
+    <mat-card>
+    <canvas id="chartPie"></canvas>
+    </mat-card>
+</mat-grid-tile>
+<mat-grid-tile>3</mat-grid-tile>
+<mat-grid-tile>4</mat-grid-tile>
+</mat-grid-list>
