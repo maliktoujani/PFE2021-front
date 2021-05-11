@@ -34,5 +34,4 @@ export class AuthentificationService {
     sessionStorage.removeItem('username');
     this.router.navigate(['']);
   }
-
 }

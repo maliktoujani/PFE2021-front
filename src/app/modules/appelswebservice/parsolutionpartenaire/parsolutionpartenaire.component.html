@@ -1,0 +1,33 @@
+<h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Appels des web service : par solution partenaire</h2>
+
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel *ngFor="let solutionpartenaire of solutionpartenaires" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{solutionpartenaire.username}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{solutionpartenaire.email}} | {{solutionpartenaire.phone}}
+                <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-label>Historique des appels :</mat-label>
+        <table>
+            <tr>
+            <th>Web service</th>
+            <th>Date d'appel</th>
+            <th>Heure d'appel</th>
+            <th>Résultat d'appel</th>
+            </tr>
+        
+            <tr *ngFor="let historiqueAppel of solutionpartenaire.historiqueAppels">
+            <td>{{historiqueAppel.webService.url}}</td>
+            <td>{{historiqueAppel.dateHeure | date:'fullDate'}}</td>
+            <td>{{historiqueAppel.dateHeure | date:'mediumTime'}}</td>
+            <td *ngIf="historiqueAppel.resultat == true; then reussi else echec"></td>
+                <ng-template #reussi>Réussi</ng-template>
+                <ng-template #echec>Echec</ng-template>
+            </tr>
+        </table>
+    </mat-expansion-panel>
+</mat-accordion>
