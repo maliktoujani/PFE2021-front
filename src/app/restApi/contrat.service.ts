@@ -49,3 +49,5 @@ export class ContratService {
     return this.http.delete<void>(`${this.apiServerUrl}/delete/${contratId}`,{headers});
   }
 }
+
+

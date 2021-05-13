@@ -42,3 +42,6 @@ export class WebserviceService {
     return this.http.delete<void>(`${this.apiServerUrl}/delete/${webServiceId}`);
   }
 }
+
+
+

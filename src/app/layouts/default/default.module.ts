@@ -47,6 +47,7 @@ import { ParsolutionpartenaireComponent } from 'src/app/modules/appelswebservice
 import { ParwebserviceComponent } from 'src/app/modules/appelswebservice/parwebservice/parwebservice.component';
 import { RapportparsolutionpartenaireComponent } from 'src/app/modules/rapportrecapitulatif/rapportparsolutionpartenaire/rapportparsolutionpartenaire.component';
 import { RapportparwebserviceComponent } from 'src/app/modules/rapportrecapitulatif/rapportparwebservice/rapportparwebservice.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { RapportparwebserviceComponent } from 'src/app/modules/rapportrecapitula
     MatGridListModule,
     MatTabsModule,
     MatMenuModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ChartsModule
   ],
   providers: []
 })

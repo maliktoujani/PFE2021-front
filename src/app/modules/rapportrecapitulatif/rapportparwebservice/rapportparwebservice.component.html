@@ -1,32 +1,48 @@
 <h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Rapport récapitulatif : par web service</h2>
 
 <mat-card>
-<canvas id="canvas"></canvas>
+    <canvas baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    [chartType]="barChartType"></canvas>
 </mat-card>
 
+<br>
 <mat-divider></mat-divider>
+<br>
 
-<mat-grid-list cols="3" rowHeight="2:1">
-<mat-grid-tile>
-    <mat-card>
-    <canvas id="chartLine1"></canvas>
-    </mat-card>
-</mat-grid-tile>
-<mat-grid-tile>
-    <mat-card>
-    <canvas id="chartLine2"></canvas>
-    </mat-card>
-</mat-grid-tile>
-<mat-grid-tile> 
-    <mat-card>
-    <canvas id="chartLine3"></canvas>
-    </mat-card>
-</mat-grid-tile>
-</mat-grid-list>
+<div fxLayout="row">
 
-<mat-grid-list cols="2" rowHeight="2:1">
-<mat-grid-tile>
-    <mat-card>
+    <mat-card fxFlex="33.33">
+        <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"></canvas>
+    </mat-card>
+
+    <mat-card fxFlex="33.33">
+        <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="doughnutChartLabels"
+        [chartType]="doughnutChartType"></canvas>
+    </mat-card>
+
+    <mat-card fxFlex="33.33">
+        <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="radarChartLabels"
+        [chartType]="radarChartType"></canvas>
+    </mat-card>
+    
+</div>
+
+<br>
+<mat-divider></mat-divider>
+<br>
+
+<mat-card>
     <div>Les appels de web services d'aujourd'hui :</div>
     <table>
         <tr>
@@ -45,13 +61,8 @@
             <ng-template #echec>Echec</ng-template>
         </tr>
     </table>
-    </mat-card>
-</mat-grid-tile>
-<mat-grid-tile>
-    <mat-card>
-    <canvas id="chartPie"></canvas>
-    </mat-card>
-</mat-grid-tile>
-<mat-grid-tile>3</mat-grid-tile>
-<mat-grid-tile>4</mat-grid-tile>
-</mat-grid-list>
+</mat-card>
+
+<br>
+<mat-divider></mat-divider>
+<br>
