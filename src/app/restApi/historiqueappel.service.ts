@@ -36,6 +36,27 @@ export class HistoriqueappelService {
     return this.http.get<any>(`${this.apiServerUrl}/statistiqueperday`,{headers});
   }
 
+  public getStatistiquePerDayBySolutionPartenaire(): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperdaybysolutionpartenaire`,{headers});
+  }
+
+  public getStatistiquePercentage(): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/statistiquepercentage`,{headers});
+  }
+
+  public getStatistiquePercentageBySolutionPartenaire(): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/statistiquepercentagebysolutionpartenaire`,{headers});
+  }
+
   public getStatistiquePerDayByWebService(webServiceId: number): Observable<any>{
     let username='admin'
     let password='admin'

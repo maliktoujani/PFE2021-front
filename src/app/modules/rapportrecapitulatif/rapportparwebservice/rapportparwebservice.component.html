@@ -6,7 +6,7 @@
     [labels]="barChartLabels"
     [options]="barChartOptions"
     [legend]="barChartLegend"
-    [chartType]="barChartType"></canvas>
+    chartType="bar"></canvas>
 </mat-card>
 
 <br>
@@ -17,23 +17,23 @@
 
     <mat-card fxFlex="33.33">
         <canvas baseChart
-        [datasets]="barChartData"
+        [datasets]="pieChartData"
         [labels]="pieChartLabels"
-        [chartType]="pieChartType"></canvas>
+        chartType="pie"></canvas>
     </mat-card>
 
     <mat-card fxFlex="33.33">
         <canvas baseChart
         [datasets]="barChartData"
         [labels]="doughnutChartLabels"
-        [chartType]="doughnutChartType"></canvas>
+        chartType="doughnut"></canvas>
     </mat-card>
 
     <mat-card fxFlex="33.33">
         <canvas baseChart
         [datasets]="barChartData"
         [labels]="radarChartLabels"
-        [chartType]="radarChartType"></canvas>
+        chartType="radar"></canvas>
     </mat-card>
     
 </div>
@@ -43,13 +43,13 @@
 <br>
 
 <mat-card>
-    <div>Les appels de web services d'aujourd'hui :</div>
+    <h2 matSubheader>Les appels de web services d'aujourd'hui :</h2>
     <table>
         <tr>
-        <th>Solution partenaire</th>
-        <th>Web service</th>
-        <th>Heure d'appel</th>
-        <th>Résultat d'appel</th>
+        <th><span>Solution partenaire</span></th>
+        <th><span>Web service</span></th>
+        <th><span>Heure d'appel</span></th>
+        <th><span>Résultat d'appel</span></th>
         </tr>
     
         <tr *ngFor="let todaysAppel of todaysAppels">
@@ -64,5 +64,4 @@
 </mat-card>
 
 <br>
-<mat-divider></mat-divider>
 <br>

@@ -21,19 +21,15 @@ export class RapportparwebserviceComponent implements OnInit {
   };
 
   public barChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-  public barChartType = 'bar';
   public barChartLegend = true;
-
   public barChartData = [];
 
-  public doughnutChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-  public doughnutChartType = 'doughnut';
+  public pieChartLabels = ['https://cat-fact.herokuapp.com/facts', 'https://www.boredapi.com/api/activity'];
+  public pieChartData = [];
 
-  public pieChartLabels = ['Echec', 'Reussite'];
-  public pieChartType = 'pie';
+  public doughnutChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
   public radarChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-  public radarChartType = 'radar';
 
   dataPerDay1:number[];
   dataPerDayTot:any;
@@ -49,25 +45,11 @@ export class RapportparwebserviceComponent implements OnInit {
   ngOnInit(): void{
 
     this.getStatistiquePerDay();
+
+    this.getStatistiquePercentage();
     
     this.getTodaysAppelWebService();
-
-    this.getWebServices();
-
-    this.getStatistiquePerDayByWebService(2);
-
-  }
-
-
-  public getWebServices(){
-    this.webServiceService.getAllWebServices().subscribe(
-      (response: WebService[]) => {
-        this.webServices=response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-      );
+    
   }
 
   public getTodaysAppelWebService(){
@@ -92,10 +74,10 @@ export class RapportparwebserviceComponent implements OnInit {
       );
   }
 
-  public getStatistiquePerDayByWebService(id:number):any{
-    this.historiqueappelService.getStatistiquePerDayByWebService(id).subscribe(
-      (response: number[]) => {
-          return response;
+  public getStatistiquePercentage(){
+    this.historiqueappelService.getStatistiquePercentage().subscribe(
+      (response: any) => {
+        this.pieChartData = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
