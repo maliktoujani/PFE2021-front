@@ -61,7 +61,7 @@
                             <div *ngFor="let periode of infoAcces.periodeAcces">
                                 <div mat-subheader> Jour : {{periode.jour}} | Heure début : {{periode.heureDebut}}h | Heure fin : {{periode.heureFin}}h</div>
                             </div>
-                            <button mat-icon-button color="primary" (click)="onDialogEditInfoAcces(infoAcces.id)"><mat-icon>edit</mat-icon></button>
+                            <button mat-icon-button color="primary" (click)="onDialogEditInfoAcces(infoAcces, infoAcces.periodeAcces)"><mat-icon>edit</mat-icon></button>
                             <mat-divider></mat-divider>
                     </div>
                   </mat-list>

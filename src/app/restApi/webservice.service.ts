@@ -17,7 +17,7 @@ export interface WebService {
 })
 export class WebserviceService {
 
-  private apiServerUrl=environment.apiBaseUrl+'/webservice';
+  private apiServerUrl=environment.apiBaseUrl+'/admin/webservice';
   constructor(private http: HttpClient) { }
 
   public getAllWebServices(): Observable<any>{

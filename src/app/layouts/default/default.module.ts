@@ -48,6 +48,9 @@ import { ParwebserviceComponent } from 'src/app/modules/appelswebservice/parwebs
 import { RapportparsolutionpartenaireComponent } from 'src/app/modules/rapportrecapitulatif/rapportparsolutionpartenaire/rapportparsolutionpartenaire.component';
 import { RapportparwebserviceComponent } from 'src/app/modules/rapportrecapitulatif/rapportparwebservice/rapportparwebservice.component';
 import { ChartsModule } from 'ng2-charts';
+import { DialogsuppwebserviceComponent } from 'src/app/dialog/dialogsuppwebservice/dialogsuppwebservice.component';
+import { DialogajoutwebserviceComponent } from 'src/app/dialog/dialogajoutwebservice/dialogajoutwebservice.component';
+import { DialogeditwebserviceComponent } from 'src/app/dialog/dialogeditwebservice/dialogeditwebservice.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,10 @@ import { ChartsModule } from 'ng2-charts';
     ParsolutionpartenaireComponent,
     ParwebserviceComponent,
     RapportparsolutionpartenaireComponent,
-    RapportparwebserviceComponent
+    RapportparwebserviceComponent,
+    DialogsuppwebserviceComponent,
+    DialogajoutwebserviceComponent,
+    DialogeditwebserviceComponent
   ],
   entryComponents: [DialogajoutComponent],
   imports: [

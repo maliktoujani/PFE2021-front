@@ -19,7 +19,7 @@ export class InfoAcces {
 })
 export class InfoaccesService {
 
-  private apiServerUrl=environment.apiBaseUrl+'/infoacces';
+  private apiServerUrl=environment.apiBaseUrl+'/admin/infoacces';
   constructor(private http: HttpClient) { }
 
   public getAllInfoAcces(): Observable<any>{

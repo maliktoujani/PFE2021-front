@@ -19,7 +19,7 @@ export interface HistoriqueAppel {
 })
 export class HistoriqueappelService {
 
-  private apiServerUrl=environment.apiBaseUrl+'/historiqueappel';
+  private apiServerUrl=environment.apiBaseUrl+'/admin/historiqueappel';
   constructor(private http: HttpClient) { }
 
   public getAllHistoriqueAppel(): Observable<any>{

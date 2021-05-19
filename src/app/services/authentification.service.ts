@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthentificationService {
 
-  private apiServerUrl=environment.apiBaseUrl+'/user';
+  private apiServerUrl=environment.apiBaseUrl+'/admin/user';
 
   constructor(private httpClient:HttpClient, private router:Router) {}
 

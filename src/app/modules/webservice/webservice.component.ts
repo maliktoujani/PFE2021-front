@@ -1,19 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
-interface webservice {
-  value: string;
-  viewValue: string;
-}
-
-interface contrat {
-  value: string;
-  viewValue: string;
-}
-
-interface format {
-  value: string;
-  viewValue: string;
-}
+import { MatDialog } from '@angular/material/dialog';
+import { DialogajoutwebserviceComponent } from 'src/app/dialog/dialogajoutwebservice/dialogajoutwebservice.component';
+import { DialogeditwebserviceComponent } from 'src/app/dialog/dialogeditwebservice/dialogeditwebservice.component';
+import { DialogsuppwebserviceComponent } from 'src/app/dialog/dialogsuppwebservice/dialogsuppwebservice.component';
+import { Contrat } from 'src/app/restApi/contrat.service';
+import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-webservice',
@@ -22,30 +15,67 @@ interface format {
 })
 export class WebserviceComponent implements OnInit {
 
-  checked = false;
-  indeterminate = false;
-  labelPosition: 'before' | 'after' = 'after';
-  disabled = false;
+  constructor(private webServiceService: WebserviceService, private dialog:MatDialog){}
 
-  webservices: webservice[] = [
-    {value: 'Web service 1', viewValue: 'Web service 1'},
-    {value: 'Web service 2', viewValue: 'Web service 2'},
-    {value: 'Web service 3', viewValue: 'Web service 3'}
-  ];
+  displayedColumns= ["url de base", "url de sortie", "format", "methodeHttp", "actions"];
+  webServices:WebService[];
+  contrats:Contrat[];
+  url=environment.apiBaseUrl+'/webservice/';
 
-  contrats: contrat[] = [
-    {value: 'Contrat 1', viewValue: 'Contrat 1'},
-    {value: 'Contrat 2', viewValue: 'Contrat 2'},
-    {value: 'Contrat 3', viewValue: 'Contrat 3'}
-  ];
+  ngOnInit(){
 
-  formats: format[] = [
-    {value: 'JSON', viewValue: 'JSON'},
-    {value: 'XML', viewValue: 'XML'}
-  ];
-  constructor() { }
+    this.getWebServices(); 
 
-  ngOnInit(): void {
+  }
+
+  public getWebServices(){
+    this.webServiceService.getAllWebServices().subscribe(
+      (response: WebService[]) => {
+        this.webServices=response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+      );
+  }
+
+  openDialogAjout(){
+    this.dialog.open(DialogajoutwebserviceComponent);
+  }
+
+  openDialogEdit(element:WebService){
+    this.dialog.open(DialogeditwebserviceComponent,{
+      data:{
+        id:element.id,
+        url:element.url,
+        format:element.format,
+        methodeHttp:element.methodeHttp
+      }
+    });
+  }
+
+  openDialogSupp(id:string){
+    this.dialog.open(DialogsuppwebserviceComponent,{
+      data:{
+        id:id
+      }
+    });
+  }
+
+  public searchWebServices(key:string):void{
+    const results:WebService[]=[];
+    for(const webService of this.webServices){
+      if(webService.url.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+         webService.format.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+         webService.methodeHttp.toLowerCase().indexOf(key.toLowerCase()) !== -1){
+        results.push(webService);
+      }
+    }
+    this.webServices=results;
+    if(!key){
+      this.getWebServices();
+    }
   }
 
 }
+
