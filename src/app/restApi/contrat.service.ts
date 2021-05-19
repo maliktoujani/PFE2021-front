@@ -18,7 +18,7 @@ export interface Contrat {
 })
 export class ContratService {
 
-  private apiServerUrl=environment.apiBaseUrl+'/contrat';
+  private apiServerUrl=environment.apiBaseUrl+'/admin/contrat';
   constructor(private http: HttpClient) { }
 
   public getAllContrats(): Observable<any>{
@@ -49,3 +49,5 @@ export class ContratService {
     return this.http.delete<void>(`${this.apiServerUrl}/delete/${contratId}`,{headers});
   }
 }
+
+

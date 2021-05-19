@@ -19,7 +19,7 @@ export interface HistoriqueAppel {
 })
 export class HistoriqueappelService {
 
-  private apiServerUrl=environment.apiBaseUrl+'/historiqueappel';
+  private apiServerUrl=environment.apiBaseUrl+'/admin/historiqueappel';
   constructor(private http: HttpClient) { }
 
   public getAllHistoriqueAppel(): Observable<any>{
@@ -34,6 +34,27 @@ export class HistoriqueappelService {
     let password='admin'
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     return this.http.get<any>(`${this.apiServerUrl}/statistiqueperday`,{headers});
+  }
+
+  public getStatistiquePerDayBySolutionPartenaire(): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperdaybysolutionpartenaire`,{headers});
+  }
+
+  public getStatistiquePercentage(): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/statistiquepercentage`,{headers});
+  }
+
+  public getStatistiquePercentageBySolutionPartenaire(): Observable<any>{
+    let username='admin'
+    let password='admin'
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>(`${this.apiServerUrl}/statistiquepercentagebysolutionpartenaire`,{headers});
   }
 
   public getStatistiquePerDayByWebService(webServiceId: number): Observable<any>{

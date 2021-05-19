@@ -15,7 +15,7 @@ export interface PeriodeAcces {
 })
 export class PeriodeaccesService {
 
-  private apiServerUrl=environment.apiBaseUrl+'/periodeacces';
+  private apiServerUrl=environment.apiBaseUrl+'/admin/periodeacces';
   constructor(private http: HttpClient) { }
 
   public getAllPeriodeAcces(): Observable<any>{

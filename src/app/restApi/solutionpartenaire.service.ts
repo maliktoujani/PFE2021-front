@@ -20,7 +20,7 @@ export interface SolutionPartenaire {
 })
 export class SolutionPartenaireService {
 
-  private apiServerUrl=environment.apiBaseUrl+'/solutionpartenaire';
+  private apiServerUrl=environment.apiBaseUrl+'/admin/solutionpartenaire';
 
   
   constructor(private http: HttpClient) { }

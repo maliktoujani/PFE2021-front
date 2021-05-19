@@ -1,1 +1,67 @@
 <h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Rapport récapitulatif : par solution partenaire</h2>
+
+<mat-card>
+    <canvas baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    chartType="bar"></canvas>
+</mat-card>
+
+<br>
+<mat-divider></mat-divider>
+<br>
+
+<div fxLayout="row">
+
+    <mat-card fxFlex="33.33">
+        <canvas baseChart
+        [datasets]="pieChartData"
+        [labels]="pieChartLabels"
+        chartType="pie"></canvas>
+    </mat-card>
+
+    <mat-card fxFlex="33.33">
+        <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="doughnutChartLabels"
+        chartType="doughnut"></canvas>
+    </mat-card>
+
+    <mat-card fxFlex="33.33">
+        <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="radarChartLabels"
+        chartType="radar"></canvas>
+    </mat-card>
+    
+</div>
+
+<br>
+<mat-divider></mat-divider>
+<br>
+
+<mat-card>
+    <h2 matSubheader>Les appels de web services d'aujourd'hui :</h2>
+    <table>
+        <tr>
+        <th><span>Solution partenaire</span></th>
+        <th><span>Web service</span></th>
+        <th><span>Heure d'appel</span></th>
+        <th><span>Résultat d'appel</span></th>
+        </tr>
+    
+        <tr *ngFor="let todaysAppel of todaysAppels">
+        <td>{{todaysAppel.solutionPartenaire.username}}</td>
+        <td>{{todaysAppel.webService.url}}</td>
+        <td>{{todaysAppel.dateHeure | date:'mediumTime'}}</td>
+        <td *ngIf="todaysAppel.resultat == true; then reussi else echec"></td>
+            <ng-template #reussi>Réussi</ng-template>
+            <ng-template #echec>Echec</ng-template>
+        </tr>
+    </table>
+</mat-card>
+
+<br>
+<br>

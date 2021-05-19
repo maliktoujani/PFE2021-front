@@ -8,6 +8,8 @@ import { DialogsuppcontratComponent } from 'src/app/dialog/dialogsuppcontrat/dia
 import { DialogeditinfoaccesComponent } from 'src/app/dialog/dialogeditinfoacces/dialogeditinfoacces.component';
 import { DialogaddinfoaccesComponent } from 'src/app/dialog/dialogaddinfoacces/dialogaddinfoacces.component';
 import { DialogsuppinfoaccesComponent } from 'src/app/dialog/dialogsuppinfoacces/dialogsuppinfoacces.component';
+import { InfoAcces } from 'src/app/restApi/infoacces.service';
+import { PeriodeAcces } from 'src/app/restApi/periodeacces.service';
 
 @Component({
   selector: 'app-modifiercontrat',
@@ -73,10 +75,13 @@ export class ModifiercontratComponent implements OnInit {
     });
   }
 
-  onDialogEditInfoAcces(id:number){
+  onDialogEditInfoAcces(element:InfoAcces, element2:PeriodeAcces){
     this.dialog.open(DialogeditinfoaccesComponent,{
       data:{
-        id:id
+        id:element.id,
+        commentaire:element.commentaire,
+        webService:element.webService,
+        heureDebut:element.periodeAcces     
       }
     });
   }
