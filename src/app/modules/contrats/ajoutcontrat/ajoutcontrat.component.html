@@ -1,38 +1,42 @@
-<h2 matSubheader fxLayoutAlign="center" >Ajouter un contrat</h2>
+<h2 class="text-center">Ajouter un contrat</h2>
 
 <br>
 
 <mat-vertical-stepper class="mat-elevation-z2" [linear]="true">
     <mat-step label="Ajouter un contrat" [editable]="false" [stepControl]="contratForm">
         <form [formGroup]="contratForm">
-            <div fxLayoutAlign="space-around">
-                <mat-form-field>
-                <mat-label>Titre</mat-label>
-                <input matInput placeholder="Ex. Contrat C1" formControlName="title" required>
-            </mat-form-field>
+            <div class="container">
+                <div class="row">
+                    <mat-form-field class="col">
+                        <mat-label>Titre</mat-label>
+                        <input matInput placeholder="Ex. Contrat C1" formControlName="title" required>
+                    </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Periode du contrat</mat-label>
-                <mat-date-range-input [rangePicker]="picker" required>
-                  <input matStartDate formControlName="dateDebut" placeholder="Date début">
-                  <input matEndDate formControlName="dateFin" placeholder="Date fin">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-                <mat-error *ngIf="contratForm.controls.dateDebut.hasError('matStartDateInvalid')">Date début invalide</mat-error>
-                <mat-error *ngIf="contratForm.controls.dateFin.hasError('matEndDateInvalid')">Date fin invalide</mat-error>
-            </mat-form-field>
+                    <mat-form-field class="col">
+                        <mat-label>Periode du contrat</mat-label>
+                        <mat-date-range-input [rangePicker]="picker" required>
+                        <input matStartDate formControlName="dateDebut" placeholder="Date début">
+                        <input matEndDate formControlName="dateFin" placeholder="Date fin">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                        <mat-error *ngIf="contratForm.controls.dateDebut.hasError('matStartDateInvalid')">Date début invalide</mat-error>
+                        <mat-error *ngIf="contratForm.controls.dateFin.hasError('matEndDateInvalid')">Date fin invalide</mat-error>
+                    </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Solution partenaire</mat-label>
-                <mat-select formControlName="solutionPartenaire" required>
-                    <mat-option *ngFor="let solution of solutions" [value]="solution">
-                        {{solution.username}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+                    <mat-form-field class="col">
+                        <mat-label>Solution partenaire</mat-label>
+                        <mat-select formControlName="solutionPartenaire" required>
+                            <mat-option *ngFor="let solution of solutions" [value]="solution">
+                                {{solution.username}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-            <mat-form-field><input matInput placeholder="Label" formControlName="label"></mat-form-field>
+                    <mat-form-field class="col">
+                        <input matInput placeholder="Label" formControlName="label">
+                    </mat-form-field>
+                </div>
             </div>
 
         <button mat-raised-button type="submit" color="primary" (click)="addContrat()" [disabled]="contratForm.invalid" matStepperNext>Valider</button>
@@ -59,28 +63,29 @@
 
         <form [formGroup]="periodeAccesForm">
           <div formArrayName="periodeAcces">
-            <div *ngFor="let obj of periodeAccesForms.controls; let i=index" [formGroupName]="i" fxLayoutAlign="space-around">
-                <mat-form-field>
-                  <mat-label>Jour</mat-label>
-                  <mat-select formControlName="jour" required>
-                      <mat-option *ngFor="let day of days" [value]="day.value">
-                          {{day.name}}
-                      </mat-option>
-                  </mat-select>
-              </mat-form-field>
-                                     
-              <mat-form-field>
-                  <mat-label>Heure début</mat-label>
-                  <input matInput formControlName="heureDebut" placeholder="Ex. 00" required>
-              </mat-form-field>
-                             
-              <mat-form-field>
-                  <mat-label>Heure fin</mat-label>
-                  <input matInput formControlName="heureFin" placeholder="Ex. 23" required>
-              </mat-form-field>
+            <div *ngFor="let obj of periodeAccesForms.controls; let i=index" [formGroupName]="i" class="container">
+                <div class="row">
+                    <mat-form-field class="col">
+                        <mat-label>Jour</mat-label>
+                        <mat-select formControlName="jour" required>
+                            <mat-option *ngFor="let day of days" [value]="day.value">
+                                {{day.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                                        
+                    <mat-form-field class="col">
+                        <mat-label>Heure début</mat-label>
+                        <input matInput formControlName="heureDebut" placeholder="Ex. 00" required>
+                    </mat-form-field>
+                                    
+                    <mat-form-field class="col">
+                        <mat-label>Heure fin</mat-label>
+                        <input matInput formControlName="heureFin" placeholder="Ex. 23" required>
+                    </mat-form-field>
 
-              <button mat-icon-button color="primary" (click)="onRemovePeriodeAcces(i)"><mat-icon>delete</mat-icon></button>
-
+                    <button mat-icon-button class="col-1" color="primary" (click)="onRemovePeriodeAcces(i)"><mat-icon>delete</mat-icon></button>
+                </div>
             </div>  
 
             <div fxLayoutAlign="center">

@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-parwebservice',
@@ -10,6 +11,8 @@ import { WebService, WebserviceService } from 'src/app/restApi/webservice.servic
 export class ParwebserviceComponent implements OnInit {
 
   webservices: WebService[];
+  url=environment.apiBaseUrl+'/webservice/';
+
   constructor(private webServiceService: WebserviceService) { }
 
   ngOnInit(): void {

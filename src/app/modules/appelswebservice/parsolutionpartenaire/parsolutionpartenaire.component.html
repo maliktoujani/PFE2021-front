@@ -1,4 +1,4 @@
-<h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Appels des web service : par solution partenaire</h2>
+<h2 class="text-center">Appels des web service : par solution partenaire</h2>
 
 <mat-accordion class="example-headers-align">
     <mat-expansion-panel *ngFor="let solutionpartenaire of solutionpartenaires" hideToggle>
@@ -21,7 +21,7 @@
             </tr>
         
             <tr *ngFor="let historiqueAppel of solutionpartenaire.historiqueAppels">
-            <td>{{historiqueAppel.webService.url}}</td>
+            <td>{{url}}{{historiqueAppel.webService.id}}</td>
             <td>{{historiqueAppel.dateHeure | date:'fullDate'}}</td>
             <td>{{historiqueAppel.dateHeure | date:'mediumTime'}}</td>
             <td *ngIf="historiqueAppel.resultat == true; then reussi else echec"></td>
