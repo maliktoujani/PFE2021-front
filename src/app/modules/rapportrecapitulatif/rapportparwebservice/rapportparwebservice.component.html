@@ -1,4 +1,4 @@
-<h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Rapport récapitulatif : par web service</h2>
+<h2 class="text-center">Rapport récapitulatif : par web service</h2>
 
 <mat-card>
     <canvas baseChart
@@ -16,6 +16,14 @@
 <div fxLayout="row">
 
     <mat-card fxFlex="33.33">
+        <h4><strong>Le web service le plus utilisé:</strong></h4>
+        <p>Web service: {{topone.label[0]}}</p>
+        <p>Nombre d'appels réussi: {{topone.data[1]}}</p>
+        <p>Nombre d'appels échoué: {{topone.data[2]}}</p>
+        <p>Totale des appels: {{topone.data[0]}}</p>
+    </mat-card>
+
+    <mat-card fxFlex="33.33">
         <canvas baseChart
         [datasets]="pieChartData"
         [labels]="pieChartLabels"
@@ -24,16 +32,9 @@
 
     <mat-card fxFlex="33.33">
         <canvas baseChart
-        [datasets]="barChartData"
+        [datasets]="doughnutChartData"
         [labels]="doughnutChartLabels"
         chartType="doughnut"></canvas>
-    </mat-card>
-
-    <mat-card fxFlex="33.33">
-        <canvas baseChart
-        [datasets]="barChartData"
-        [labels]="radarChartLabels"
-        chartType="radar"></canvas>
     </mat-card>
     
 </div>
@@ -43,18 +44,18 @@
 <br>
 
 <mat-card>
-    <h2 matSubheader>Les appels de web services d'aujourd'hui :</h2>
+    <h4><strong>Les appels de web services d'aujourd'hui :</strong></h4>
     <table>
         <tr>
-        <th><span>Solution partenaire</span></th>
-        <th><span>Web service</span></th>
-        <th><span>Heure d'appel</span></th>
-        <th><span>Résultat d'appel</span></th>
+            <th><span>Solution partenaire</span></th>
+            <th><span>Web service</span></th>
+            <th><span>Heure d'appel</span></th>
+            <th><span>Résultat d'appel</span></th>
         </tr>
     
         <tr *ngFor="let todaysAppel of todaysAppels">
         <td>{{todaysAppel.solutionPartenaire.username}}</td>
-        <td>{{todaysAppel.webService.url}}</td>
+        <td>{{url}}{{todaysAppel.webService.id}}</td>
         <td>{{todaysAppel.dateHeure | date:'mediumTime'}}</td>
         <td *ngIf="todaysAppel.resultat == true; then reussi else echec"></td>
             <ng-template #reussi>Réussi</ng-template>

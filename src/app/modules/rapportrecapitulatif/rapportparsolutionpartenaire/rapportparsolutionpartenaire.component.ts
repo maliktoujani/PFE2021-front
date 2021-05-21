@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HistoriqueAppel, HistoriqueappelService } from 'src/app/restApi/historiqueappel.service';
 import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { environment } from 'src/environments/environment';
 import { DataPerWebService } from '../rapportparwebservice/rapportparwebservice.component';
 
 @Component({
@@ -20,11 +21,12 @@ export class RapportparsolutionpartenaireComponent implements OnInit {
   public barChartLegend = true;
   public barChartData = [];
 
-  public pieChartLabels = ['malek toujani', 'test'];
+  public pieChartLabels = ['Vermeg', 'Poulina', 'Talys consulting'];
   public pieChartData = [];
 
-  public doughnutChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-
+  public doughnutChartLabels = ['Reussite', 'Echec'];
+  public doughnutChartData = [];
+  
   public radarChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
   dataPerDay1:number[];
@@ -32,8 +34,8 @@ export class RapportparsolutionpartenaireComponent implements OnInit {
   webServices:WebService[];
   todaysAppels:HistoriqueAppel[];
   dataPerWebService:DataPerWebService[];
-
-  aux:any;
+  url=environment.apiBaseUrl+'/webservice/';
+  topone:any;
 
   constructor(private historiqueappelService :HistoriqueappelService, private webServiceService :WebserviceService){}
 
@@ -45,6 +47,10 @@ export class RapportparsolutionpartenaireComponent implements OnInit {
     this.getStatistiquePercentageBySolutionPartenaire();
     
     this.getTodaysAppelWebService();
+
+    this.getStatistiqueReussiteEchec();
+
+    this.getStatistiqueTop();
 
   }
 
@@ -74,6 +80,28 @@ export class RapportparsolutionpartenaireComponent implements OnInit {
     this.historiqueappelService.getStatistiquePercentageBySolutionPartenaire().subscribe(
       (response: any) => {
         this.pieChartData = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+      );
+  }
+
+  public getStatistiqueReussiteEchec(){
+    this.historiqueappelService.getStatistiqueReussiteEchec().subscribe(
+      (response: any) => {
+        this.doughnutChartData = response;        
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+      );
+  }
+
+  public getStatistiqueTop(){
+    this.historiqueappelService.getStatistiqueTopSolutionPartenaire().subscribe(
+      (response: any) => {
+        this.topone = response;                
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

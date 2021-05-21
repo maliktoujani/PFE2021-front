@@ -4,11 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
 
-interface format {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-dialogajoutwebservice',
   templateUrl: './dialogajoutwebservice.component.html',
@@ -16,10 +11,9 @@ interface format {
 })
 export class DialogajoutwebserviceComponent implements OnInit {
 
-  formats: format[] = [
-    {value: 'JSON', viewValue: 'JSON'},
-    {value: 'XML', viewValue: 'XML'}
-  ];
+  methodeHttps: string[] = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COPY', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'PURGE', 'LOCK', 'UNLOCK', 'PROPFIND', 'VIEW'];
+
+  formats: string[] = ['JSON', 'XML'];
 
   myForm: FormGroup;
 

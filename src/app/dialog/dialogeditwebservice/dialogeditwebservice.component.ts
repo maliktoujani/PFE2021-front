@@ -6,10 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
 import { environment } from 'src/environments/environment';
 
-interface format {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-dialogeditwebservice',
@@ -18,10 +14,9 @@ interface format {
 })
 export class DialogeditwebserviceComponent implements OnInit {
 
-  formats: format[] = [
-    {value: 'JSON', viewValue: 'JSON'},
-    {value: 'XML', viewValue: 'XML'}
-  ];
+  methodeHttps: string[] = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COPY', 'HEAD', 'OPTIONS', 'LINK', 'UNLINK', 'PURGE', 'LOCK', 'UNLOCK', 'PROPFIND', 'VIEW'];
+
+  formats: string[] = ['JSON', 'XML'];
 
   myForm: FormGroup;
   urlsortie:string;

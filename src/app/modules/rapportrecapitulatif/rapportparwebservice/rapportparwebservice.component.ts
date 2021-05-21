@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HistoriqueAppel, HistoriqueappelService } from 'src/app/restApi/historiqueappel.service';
 import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { environment } from 'src/environments/environment';
 
 export interface DataPerWebService{
   webService:WebService;
@@ -24,20 +25,19 @@ export class RapportparwebserviceComponent implements OnInit {
   public barChartLegend = true;
   public barChartData = [];
 
-  public pieChartLabels = ['https://cat-fact.herokuapp.com/facts', 'https://www.boredapi.com/api/activity'];
+  public pieChartLabels = ['https://cat-fact.herokuapp.com/facts', 'https://www.boredapi.com/api/activity', 'https://api.publicapis.org/entries'];
   public pieChartData = [];
 
-  public doughnutChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-
-  public radarChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  public doughnutChartLabels = ['Reussite', 'Echec'];
+  public doughnutChartData = [];
 
   dataPerDay1:number[];
   dataPerDayTot:any;
   webServices:WebService[];
   todaysAppels:HistoriqueAppel[];
   dataPerWebService:DataPerWebService[];
-
-  aux:any;
+  url=environment.apiBaseUrl+'/webservice/';
+  topone:any;
 
   constructor(private historiqueappelService :HistoriqueappelService, private webServiceService :WebserviceService){}
 
@@ -49,6 +49,10 @@ export class RapportparwebserviceComponent implements OnInit {
     this.getStatistiquePercentage();
     
     this.getTodaysAppelWebService();
+
+    this.getStatistiqueReussiteEchec();
+
+    this.getStatistiqueTop();
     
   }
 
@@ -78,6 +82,28 @@ export class RapportparwebserviceComponent implements OnInit {
     this.historiqueappelService.getStatistiquePercentage().subscribe(
       (response: any) => {
         this.pieChartData = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+      );
+  }
+
+  public getStatistiqueReussiteEchec(){
+    this.historiqueappelService.getStatistiqueReussiteEchec().subscribe(
+      (response: any) => {
+        this.doughnutChartData = response;        
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+      );
+  }
+
+  public getStatistiqueTop(){
+    this.historiqueappelService.getStatistiqueTop().subscribe(
+      (response: any) => {
+        this.topone = response;                
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

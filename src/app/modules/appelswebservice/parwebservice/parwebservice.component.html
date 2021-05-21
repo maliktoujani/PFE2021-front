@@ -1,10 +1,10 @@
-<h2 matSubheader fxLayout="row" fxLayoutAlign="space-around center" >Appels des web service : par web service</h2>
+<h2 class="text-center">Appels des web service : par web service</h2>
 
 <mat-accordion class="example-headers-align">
     <mat-expansion-panel *ngFor="let webservice of webservices" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                {{webservice.url}}
+                {{url}}{{webservice.id}}
             </mat-panel-title>
             <mat-panel-description>
                 {{webservice.format}} | {{webservice.methodeHttp}}

@@ -7,13 +7,22 @@
             <mat-form-field>
                 <mat-label>Format</mat-label>
                 <mat-select formControlName="format" required>
-                    <mat-option *ngFor="let format of formats" [value]="format.value">
-                        {{format.viewValue}}
+                    <mat-option *ngFor="let format of formats" [value]="format">
+                        {{format}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </li>
-        <li><mat-form-field><mat-label>Methode http</mat-label><input matInput formControlName="methodeHttp" placeholder="Ex. GET" required></mat-form-field></li>
+        <li>
+            <mat-form-field>
+                <mat-label>Methode http</mat-label>
+                <mat-select formControlName="methodeHttp" required>
+                    <mat-option *ngFor="let methodeHttp of methodeHttps" [value]="methodeHttp">
+                        {{methodeHttp}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </li>
     </ul>
 </form>
 

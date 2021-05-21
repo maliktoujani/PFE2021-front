@@ -5,11 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogeditcontratComponent } from 'src/app/dialog/dialogeditcontrat/dialogeditcontrat.component';
 import { DialogsuppcontratComponent } from 'src/app/dialog/dialogsuppcontrat/dialogsuppcontrat.component';
-import { DialogeditinfoaccesComponent } from 'src/app/dialog/dialogeditinfoacces/dialogeditinfoacces.component';
 import { DialogaddinfoaccesComponent } from 'src/app/dialog/dialogaddinfoacces/dialogaddinfoacces.component';
 import { DialogsuppinfoaccesComponent } from 'src/app/dialog/dialogsuppinfoacces/dialogsuppinfoacces.component';
-import { InfoAcces } from 'src/app/restApi/infoacces.service';
-import { PeriodeAcces } from 'src/app/restApi/periodeacces.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-modifiercontrat',
@@ -26,8 +24,9 @@ import { PeriodeAcces } from 'src/app/restApi/periodeacces.service';
 export class ModifiercontratComponent implements OnInit {
 
   isTableExpanded = false;
-  displayedColumns= ["title", "dateDebut", "dateFin", "solutionPartenaire", "label", "actions"];
+  displayedColumns= ["title", "dateDebut", "dateFin", "solutionPartenaire", "label", "details", "actions"];
   contrats:Contrat[];
+  url=environment.apiBaseUrl+'/webservice/';
 
   constructor(private contratService: ContratService, private dialog?:MatDialog){}
 
@@ -71,17 +70,6 @@ export class ModifiercontratComponent implements OnInit {
     this.dialog.open(DialogsuppinfoaccesComponent,{
       data:{
         id:id
-      }
-    });
-  }
-
-  onDialogEditInfoAcces(element:InfoAcces, element2:PeriodeAcces){
-    this.dialog.open(DialogeditinfoaccesComponent,{
-      data:{
-        id:element.id,
-        commentaire:element.commentaire,
-        webService:element.webService,
-        heureDebut:element.periodeAcces     
       }
     });
   }

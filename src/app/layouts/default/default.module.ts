@@ -36,7 +36,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogsuppcontratComponent } from 'src/app/dialog/dialogsuppcontrat/dialogsuppcontrat.component';
 import { DialogeditcontratComponent } from 'src/app/dialog/dialogeditcontrat/dialogeditcontrat.component';
-import { DialogeditinfoaccesComponent } from 'src/app/dialog/dialogeditinfoacces/dialogeditinfoacces.component';
 import { DialogaddinfoaccesComponent } from 'src/app/dialog/dialogaddinfoacces/dialogaddinfoacces.component';
 import { DialogsuppinfoaccesComponent } from 'src/app/dialog/dialogsuppinfoacces/dialogsuppinfoacces.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -68,7 +67,6 @@ import { DialogeditwebserviceComponent } from 'src/app/dialog/dialogeditwebservi
     DialogeditComponent,
     DialogsuppcontratComponent,
     DialogeditcontratComponent,
-    DialogeditinfoaccesComponent,
     DialogaddinfoaccesComponent,
     DialogsuppinfoaccesComponent,
     ParsolutionpartenaireComponent,
