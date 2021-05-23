@@ -1,4 +1,10 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { DialogsettingsComponent } from 'src/app/dialog/dialogsettings/dialogsettings.component';
+import { AuthentificationService } from 'src/app/services/authentification.service';
 
 @Component({
   selector: 'app-default',
@@ -7,15 +13,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DefaultComponent implements OnInit {
 
-  sideBarOpen=true;
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
 
-  constructor() { }
+  constructor(private breakpointObserver: BreakpointObserver,
+              private dialog:MatDialog, 
+              private logoutservice: AuthentificationService) {}
 
-  ngOnInit(): void {
+  ngOnInit(){ 
   }
 
-  sideBarToggler() {
-    this.sideBarOpen= !this.sideBarOpen;
+  onOpenSettings(){
+    this.dialog.open(DialogsettingsComponent);
+  }
+
+  onLogout(){
+    this.logoutservice.logOut();
   }
 
 }

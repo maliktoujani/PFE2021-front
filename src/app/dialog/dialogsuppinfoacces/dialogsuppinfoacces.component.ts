@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { InfoaccesService } from 'src/app/restApi/infoacces.service';
+import { InfoaccesService } from 'src/app/services/infoacces.service';
 
 @Component({
   selector: 'app-dialogsuppinfoacces',

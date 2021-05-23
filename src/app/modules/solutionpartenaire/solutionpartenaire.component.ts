@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogajoutComponent } from 'src/app/dialog/dialogajout/dialogajout.component';
 import { DialogeditComponent } from 'src/app/dialog/dialogedit/dialogedit.component';
 import { DialogsuppComponent } from 'src/app/dialog/dialogsupp/dialogsupp.component';
-import { Contrat } from 'src/app/restApi/contrat.service';
-import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
+import { Contrat } from 'src/app/services/contrat.service';
+import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/services/solutionpartenaire.service';
 
 @Component({
   selector: 'app-solutionpartenaire',

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { HistoriqueAppel, HistoriqueappelService } from 'src/app/restApi/historiqueappel.service';
-import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { HistoriqueAppel, HistoriqueappelService } from 'src/app/services/historiqueappel.service';
+import { WebService, WebserviceService } from 'src/app/services/webservice.service';
 import { environment } from 'src/environments/environment';
 
 export interface DataPerWebService{
@@ -53,7 +53,7 @@ export class RapportparwebserviceComponent implements OnInit {
     this.getStatistiqueReussiteEchec();
 
     this.getStatistiqueTop();
-    
+
   }
 
   public getTodaysAppelWebService(){

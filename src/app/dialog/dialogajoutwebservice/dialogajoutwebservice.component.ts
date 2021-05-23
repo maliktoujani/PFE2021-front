@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { WebService, WebserviceService } from 'src/app/services/webservice.service';
 
 @Component({
   selector: 'app-dialogajoutwebservice',

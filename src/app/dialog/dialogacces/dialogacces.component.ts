@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { PeriodeAcces, PeriodeaccesService } from 'src/app/restApi/periodeacces.service';
+import { PeriodeAcces, PeriodeaccesService } from 'src/app/services/periodeacces.service';
 
 
 @Component({

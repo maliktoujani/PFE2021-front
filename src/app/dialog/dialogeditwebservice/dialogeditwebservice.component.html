@@ -1,33 +1,39 @@
-<h2 mat-dialog-title fxLayoutAlign="center">Modifier le web service</h2>
+<h2 mat-dialog-title class="text-center">Modifier le web service</h2>
 
 <form [formGroup]="myForm">
-    <ul>
-        <li><mat-form-field><mat-label>Url de base</mat-label><input matInput formControlName="url" required></mat-form-field></li>
-        <li><mat-form-field><mat-label>http://localhost:8080/webservice/1</mat-label><input matInput [(ngModel)]="urlsortie" [readonly]="true"></mat-form-field></li>
-        <li>
-            <mat-form-field>
-                <mat-label>Format</mat-label>
-                <mat-select formControlName="format" required>
-                    <mat-option *ngFor="let format of formats" [value]="format">
-                        {{format}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </li>
-        <li>
-            <mat-form-field>
-                <mat-label>Methode http</mat-label>
-                <mat-select formControlName="methodeHttp" required>
-                    <mat-option *ngFor="let methodeHttp of methodeHttps" [value]="methodeHttp">
-                        {{methodeHttp}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </li>
-    </ul>
+    <div class="container">
+        <div class="col">
+            <div class="row">
+                <mat-form-field><mat-label>Url de base</mat-label><input matInput formControlName="url" required></mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field><mat-label>http://localhost:8080/webservice/1</mat-label><input matInput [(ngModel)]="url" [readonly]="true"></mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>Format</mat-label>
+                    <mat-select formControlName="format" required>
+                        <mat-option *ngFor="let format of formats" [value]="format">
+                            {{format}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>Methode http</mat-label>
+                    <mat-select formControlName="methodeHttp" required>
+                        <mat-option *ngFor="let methodeHttp of methodeHttps" [value]="methodeHttp">
+                            {{methodeHttp}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
 </form>
 
-<div fxLayout="row" fxLayoutAlign="center center">
+<div class="d-flex justify-content-center">
     <button mat-button type="submit" (click)="editWebService()" [disabled]="myForm.invalid">Valider</button>
     <button mat-button id="closebutton" mat-dialog-close>Annuler</button>
 </div>

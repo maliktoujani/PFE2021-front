@@ -5,88 +5,88 @@
   <mat-label>Recherche</mat-label>
     <input matInput type="search" (ngModelChange)="searchContrats(key.value)" #key="ngModel" ngModel name="key" placeholder="Ex. ium" #input>
 </mat-form-field>
+<div class="responsiveTable mat-elevation-z2">
+  <table mat-table [dataSource]="contrats" multiTemplateDataRows>
 
-<table mat-table [dataSource]="contrats" multiTemplateDataRows class="mat-elevation-z2">
-
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef> Titre </th>
-    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="dateDebut">
-    <th mat-header-cell *matHeaderCellDef> Date début </th>
-    <td mat-cell *matCellDef="let element"> {{element.dateDebut}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="dateFin">
-    <th mat-header-cell *matHeaderCellDef> Date fin </th>
-    <td mat-cell *matCellDef="let element"> {{element.dateFin}} </td>
-  </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Titre </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
 
 
-  <ng-container matColumnDef="label">
-    <th mat-header-cell *matHeaderCellDef> Label </th>
-    <td mat-cell *matCellDef="let element"> {{element.label}} </td>
-  </ng-container>
+    <ng-container matColumnDef="dateDebut">
+      <th mat-header-cell *matHeaderCellDef> Date début </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateDebut}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="solutionPartenaire">
-    <th mat-header-cell *matHeaderCellDef> Solution partenaire </th>
-    <td mat-cell *matCellDef="let element"> {{element.solutionPartenaire.username}} </td>
-  </ng-container>
+    <ng-container matColumnDef="dateFin">
+      <th mat-header-cell *matHeaderCellDef> Date fin </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateFin}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="details">
-    <th mat-header-cell *matHeaderCellDef> Détails </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-stroked-button color="primary" (click)="element.isExpanded = !element.isExpanded">Détails</button>
-    </td>
-  </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Actions </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" (click)="openDialogEdit(element)"><mat-icon>edit</mat-icon></button>
-      <button mat-icon-button color="primary" (click)="openDialogSupp(element.id)"><mat-icon>delete</mat-icon></button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="label">
+      <th mat-header-cell *matHeaderCellDef> Label </th>
+      <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+    <ng-container matColumnDef="solutionPartenaire">
+      <th mat-header-cell *matHeaderCellDef> Solution partenaire </th>
+      <td mat-cell *matCellDef="let element"> {{element.solutionPartenaire.username}} </td>
+    </ng-container>
 
-        <div class="student-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
-            <mat-list>
-                <mat-list-item mat-subheader>Détails du contrat : {{element.title}}</mat-list-item>
-                <mat-list-item mat-subheader>Période du contrat : {{element.dateDebut}} - {{element.dateFin}}</mat-list-item>
-                <mat-list-item mat-subheader>Solution partenaire : {{element.solutionPartenaire.username}}</mat-list-item>
-                <mat-list-item mat-subheader>Label : {{element.label}}</mat-list-item>
-                <mat-list-item mat-subheader>Accés : <button mat-icon-button color="primary" (click)="onDialogAddInfoAcces(element.id)"><mat-icon>add_circle_outline</mat-icon></button></mat-list-item>
-                  <mat-list>
-                    <div *ngFor="let infoAcces of element.infoAcces">
-                        <div mat-subheader> Web service : {{url}}{{infoAcces.webService.id}} <button mat-icon-button color="primary" (click)="openDialogSuppInfoAcces(infoAcces.id)"><mat-icon>delete_outlined</mat-icon></button></div>
-                            <div *ngFor="let periode of infoAcces.periodeAcces">
-                                <div mat-subheader><ul><li>Jour : {{periode.jour}} | Heure début : {{periode.heureDebut}}h | Heure fin : {{periode.heureFin}}h</li></ul></div>
-                            </div>
-                            <br>
-                            <mat-divider></mat-divider>
-                            <br>
-                    </div>
-                  </mat-list>
-            </mat-list>
-        </div>
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef> Détails </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-stroked-button color="primary" (click)="element.isExpanded = !element.isExpanded">Détails</button>
+      </td>
+    </ng-container>
 
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="openDialogEdit(element)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="primary" (click)="openDialogSupp(element.id)"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
 
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">Aucun contrat trouvé.</td>
-  </tr>
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
-  <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+          <div class="student-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
+              <mat-list>
+                  <mat-list-item mat-subheader>Détails du contrat : {{element.title}}</mat-list-item>
+                  <mat-list-item mat-subheader>Période du contrat : {{element.dateDebut}} - {{element.dateFin}}</mat-list-item>
+                  <mat-list-item mat-subheader>Solution partenaire : {{element.solutionPartenaire.username}}</mat-list-item>
+                  <mat-list-item mat-subheader>Label : {{element.label}}</mat-list-item>
+                  <mat-list-item mat-subheader>Accés : <button mat-icon-button color="primary" (click)="onDialogAddInfoAcces(element.id)"><mat-icon>add_circle_outline</mat-icon></button></mat-list-item>
+                    <mat-list>
+                      <div *ngFor="let infoAcces of element.infoAcces">
+                          <div mat-subheader> Web service : {{url}}{{infoAcces.webService.id}} <button mat-icon-button color="primary" (click)="openDialogSuppInfoAcces(infoAcces.id)"><mat-icon>delete_outlined</mat-icon></button></div>
+                              <div *ngFor="let periode of infoAcces.periodeAcces">
+                                  <div mat-subheader><ul><li>Jour : {{periode.jour}} | Heure début : {{periode.heureDebut}}h | Heure fin : {{periode.heureFin}}h</li></ul></div>
+                              </div>
+                              <br>
+                              <mat-divider></mat-divider>
+                              <br>
+                      </div>
+                    </mat-list>
+              </mat-list>
+          </div>
 
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="student-detail-row"></tr>
+      </td>
+    </ng-container>
 
-</table>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Aucun contrat trouvé.</td>
+    </tr>
 
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="student-detail-row"></tr>
+
+  </table>
+</div>
 <br>
 <br>

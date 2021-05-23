@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Contrat, ContratService } from 'src/app/restApi/contrat.service';
-import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
+import { Contrat, ContratService } from 'src/app/services/contrat.service';
+import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/services/solutionpartenaire.service';
 
 @Component({
   selector: 'app-dialogeditcontrat',
