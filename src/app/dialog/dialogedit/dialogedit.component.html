@@ -1,13 +1,15 @@
 <h2 mat-dialog-title>Modifier une solution partenaire</h2>
 
 <form [formGroup]="myForm">
-    <ul>
-        <li><mat-form-field><mat-label>Nom d'utilisateur</mat-label><input matInput formControlName="username" required></mat-form-field></li>
-        <li><mat-form-field><mat-label>Email</mat-label><input matInput type="email" formControlName="email" placeholder="Ex. sol@example.com" required></mat-form-field></li>
-        <li><mat-form-field><mat-label>Tel/Fax</mat-label><input matInput formControlName="phone" placeholder="+216"></mat-form-field></li>
-        <li><mat-form-field><input matInput type="password" formControlName="password" placeholder="Nouveau mot de passe" required></mat-form-field></li>
-    </ul>
-    <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="container">
+        <div class="col">
+            <div class="row"><mat-form-field><mat-label>Nom d'utilisateur</mat-label><input matInput formControlName="username" required></mat-form-field></div>
+            <div class="row"><mat-form-field><mat-label>Email</mat-label><input matInput type="email" formControlName="email" placeholder="Ex. sol@example.com" required></mat-form-field></div>
+            <div class="row"><mat-form-field><mat-label>Tel/Fax</mat-label><input matInput formControlName="phone" placeholder="+216"></mat-form-field></div>
+            <div class="row"><mat-form-field><input matInput type="password" formControlName="password" placeholder="Nouveau mot de passe" required></mat-form-field></div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
         <button mat-button type="submit" (click)="editSolutionPartenaire()" [disabled]="myForm.invalid">Valider</button>
         <button mat-button id="closebutton" mat-dialog-close>Annuler</button>
     </div>

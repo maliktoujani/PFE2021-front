@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
+import { SolutionPartenaireService } from 'src/app/services/solutionpartenaire.service';
 
 @Component({
   selector: 'app-dialogsupp',

@@ -1,11 +1,5 @@
-:hosts {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
 mat-drawer {
-    width: 20%;
+    width: 300px;
 }
 
 mat-drawer-container {
@@ -14,6 +8,17 @@ mat-drawer-container {
 
 mat-drawer-content {
     padding: 20px;
+}
+
+footer {
+    padding: 15px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 

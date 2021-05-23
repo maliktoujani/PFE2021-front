@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { WebService, WebserviceService } from 'src/app/services/webservice.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -19,7 +19,7 @@ export class DialogeditwebserviceComponent implements OnInit {
   formats: string[] = ['JSON', 'XML'];
 
   myForm: FormGroup;
-  urlsortie:string;
+  url:string;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data,
               private webServiceService: WebserviceService,
@@ -28,7 +28,7 @@ export class DialogeditwebserviceComponent implements OnInit {
 
   ngOnInit(){
     
-    this.urlsortie==environment.apiBaseUrl+'/webservice/';
+    this.url==environment.apiBaseUrl+'/webservice/';
 
     this.myForm=this.formBuilder.group({
       id:[this.data.id],

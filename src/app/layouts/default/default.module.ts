@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DefaultComponent } from './default.component';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -50,6 +49,7 @@ import { ChartsModule } from 'ng2-charts';
 import { DialogsuppwebserviceComponent } from 'src/app/dialog/dialogsuppwebservice/dialogsuppwebservice.component';
 import { DialogajoutwebserviceComponent } from 'src/app/dialog/dialogajoutwebservice/dialogajoutwebservice.component';
 import { DialogeditwebserviceComponent } from 'src/app/dialog/dialogeditwebservice/dialogeditwebservice.component';
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 @NgModule({
   declarations: [
@@ -81,7 +81,6 @@ import { DialogeditwebserviceComponent } from 'src/app/dialog/dialogeditwebservi
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule,
     MatSidenavModule,
     MatDividerModule,
     FlexLayoutModule,
@@ -107,7 +106,8 @@ import { DialogeditwebserviceComponent } from 'src/app/dialog/dialogeditwebservi
     MatTabsModule,
     MatMenuModule,
     MatExpansionModule,
-    ChartsModule
+    ChartsModule,
+    MatToolbarModule
   ],
   providers: []
 })

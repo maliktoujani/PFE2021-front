@@ -13,30 +13,30 @@
 <mat-divider></mat-divider>
 <br>
 
-<div fxLayout="row">
+<div class="container">
+    <div class="row">
+        <mat-card class="col-lg-4">
+            <h4><strong>La solution partenaire la plus active :</strong></h4>
+            <p>Solution partenaire: {{topone.label[0]}}</p>
+            <p>Nombre d'appels réussi: {{topone.data[1]}}</p>
+            <p>Nombre d'appels échoué: {{topone.data[2]}}</p>
+            <p>Totale des appels: {{topone.data[0]}}</p>
+        </mat-card>
 
-    <mat-card fxFlex="33.33">
-        <h4><strong>La solution partenaire la plus active :</strong></h4>
-        <p>Solution partenaire: {{topone.label[0]}}</p>
-        <p>Nombre d'appels réussi: {{topone.data[1]}}</p>
-        <p>Nombre d'appels échoué: {{topone.data[2]}}</p>
-        <p>Totale des appels: {{topone.data[0]}}</p>
-    </mat-card>
+        <mat-card class="col-lg-4">
+            <canvas baseChart
+            [datasets]="pieChartData"
+            [labels]="pieChartLabels"
+            chartType="pie"></canvas>
+        </mat-card>
 
-    <mat-card fxFlex="33.33">
-        <canvas baseChart
-        [datasets]="pieChartData"
-        [labels]="pieChartLabels"
-        chartType="pie"></canvas>
-    </mat-card>
-
-    <mat-card fxFlex="33.33">
-        <canvas baseChart
-        [datasets]="doughnutChartData"
-        [labels]="doughnutChartLabels"
-        chartType="doughnut"></canvas>
-    </mat-card>
-    
+        <mat-card class="col-lg-4">
+            <canvas baseChart
+            [datasets]="doughnutChartData"
+            [labels]="doughnutChartLabels"
+            chartType="doughnut"></canvas>
+        </mat-card>
+    </div>
 </div>
 
 <br>
@@ -64,5 +64,4 @@
     </table>
 </mat-card>
 
-<br>
 <br>

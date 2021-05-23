@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { WebserviceService } from 'src/app/restApi/webservice.service';
+import { WebserviceService } from 'src/app/services/webservice.service';
 
 @Component({
   selector: 'app-dialogsuppwebservice',

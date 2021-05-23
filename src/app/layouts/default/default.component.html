@@ -1,12 +1,82 @@
-<app-header (toggleSideBarForMe)="sideBarToggler()"></app-header>
+<mat-toolbar color='primary'>
+    <mat-toolbar-row>
+        <button mat-icon-button (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
+        <span>Arabsoft</span>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="end" class="align-self-end">
+            <ul fxLayout="row" fxLayoutGap="20px">
+                <li>
+                    <button mat-icon-button>
+                        <mat-icon>help_outline</mat-icon>
+                    </button>
+                </li>
+                <li>
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>person_outline</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="onOpenSettings()">
+                            <mat-icon>settings</mat-icon>Paramètres
+                        </button>
+                        <button mat-menu-item (click)="onLogout()">
+                            <mat-icon>exit_to_app</mat-icon>Déconnexion
+                        </button>
+                    </mat-menu>
+                </li>
+            </ul>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
 
 <mat-drawer-container>
-    <mat-drawer mode="side" [opened]="sideBarOpen">
-        <app-sidebar></app-sidebar>
+    <mat-drawer #drawer mode="side" class="sidenav"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+    
+    <mat-nav-list>
+
+        <div class="row" class="text-center">
+            <br>
+            <img src="https://www.bootdey.com/img/Content/avatar/avatar7.png" alt="Photo de profile">
+            <br>
+            <h2>Malek Toujani</h2>
+            <h4>maliktoujani@gmail.com</h4>
+        </div>
+    
+        <mat-divider></mat-divider>
+    
+        <h2 matSubheader>Solutions partenaires</h2>
+        
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/home/solutionpartenaire">Gestion solutions partenaire</a>
+        <h2 matSubheader>Contrats</h2>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/home/ajoutcontrat">Ajouter contrat</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/home/modifiercontrat">Gestion des contrats</a>
+        <h2 matSubheader>Web service</h2>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/home/webservice">Paramètrer les web services</a>
+        <h2 matSubheader>Statistiques</h2>
+        <a mat-list-item [matMenuTriggerFor]="menu1">Appels web service</a>
+            <mat-menu #menu1="matMenu">
+            <button mat-menu-item routerLinkActive="list-item-active" routerLink="/home/appelswebservice/parsolutionpartenaire">Par solution partenaire</button>
+            <button mat-menu-item routerLinkActive="list-item-active" routerLink="/home/appelswebservice/parwebservice">Par web service</button>
+            </mat-menu>
+    
+        <a mat-list-item [matMenuTriggerFor]="menu2">Rapport récapitulatif</a>
+            <mat-menu #menu2="matMenu">
+            <button mat-menu-item routerLinkActive="list-item-active" routerLink="/home/rapportrecapitulatif/parsolutionpartenaire">Par solution partenaire</button>
+            <button mat-menu-item routerLinkActive="list-item-active" routerLink="/home/rapportrecapitulatif/parwebservice">Par web service</button>
+            </mat-menu>
+            
+    
+    </mat-nav-list>
+
     </mat-drawer>
     <mat-drawer-content>
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
 
-<app-footer></app-footer>
+<mat-divider></mat-divider>
+<footer>
+    © All right reserved 2021
+</footer>

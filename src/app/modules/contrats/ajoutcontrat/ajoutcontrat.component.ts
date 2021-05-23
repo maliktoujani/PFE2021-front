@@ -2,11 +2,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Contrat, ContratService } from 'src/app/restApi/contrat.service';
-import { InfoAcces, InfoaccesService } from 'src/app/restApi/infoacces.service';
-import { PeriodeAcces, PeriodeaccesService } from 'src/app/restApi/periodeacces.service';
-import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/restApi/solutionpartenaire.service';
-import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { Contrat, ContratService } from 'src/app/services/contrat.service';
+import { InfoAcces, InfoaccesService } from 'src/app/services/infoacces.service';
+import { PeriodeAcces, PeriodeaccesService } from 'src/app/services/periodeacces.service';
+import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/services/solutionpartenaire.service';
+import { WebService, WebserviceService } from 'src/app/services/webservice.service';
 
 export interface day {
   name: string;

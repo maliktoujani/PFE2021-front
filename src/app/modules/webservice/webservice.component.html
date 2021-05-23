@@ -5,46 +5,46 @@
   <mat-label>Recherche</mat-label>
   <input matInput type="search" (ngModelChange)="searchWebServices(key.value)" #key="ngModel" ngModel name="key" placeholder="Ex. ium" #input>
 </mat-form-field>
+<div class="responsiveTable mat-elevation-z2">
+  <table mat-table [dataSource]="webServices">
 
-<table mat-table [dataSource]="webServices" class="mat-elevation-z2">
+    <ng-container matColumnDef="url de base">
+      <th mat-header-cell *matHeaderCellDef> Url de base</th>
+      <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="url de base">
-    <th mat-header-cell *matHeaderCellDef> Url de base</th>
-    <td mat-cell *matCellDef="let element"> {{element.url}} </td>
-  </ng-container>
+    <ng-container matColumnDef="url de sortie">
+      <th mat-header-cell *matHeaderCellDef> Url de sortie</th>
+      <td mat-cell *matCellDef="let element"> {{url}}{{element.id}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="url de sortie">
-    <th mat-header-cell *matHeaderCellDef> Url de sortie</th>
-    <td mat-cell *matCellDef="let element"> {{url}}{{element.id}} </td>
-  </ng-container>
+    <ng-container matColumnDef="format">
+      <th mat-header-cell *matHeaderCellDef> Format </th>
+      <td mat-cell *matCellDef="let element"> {{element.format}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="methodeHttp">
+      <th mat-header-cell *matHeaderCellDef> Methode http </th>
+      <td mat-cell *matCellDef="let element" > {{element.methodeHttp}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="format">
-    <th mat-header-cell *matHeaderCellDef> Format </th>
-    <td mat-cell *matCellDef="let element"> {{element.format}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="methodeHttp">
-    <th mat-header-cell *matHeaderCellDef> Methode http </th>
-    <td mat-cell *matCellDef="let element" > {{element.methodeHttp}} </td>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="openDialogEdit(element)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="primary" (click)="openDialogSupp(element.id)"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Actions </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" (click)="openDialogEdit(element)"><mat-icon>edit</mat-icon></button>
-      <button mat-icon-button color="primary" (click)="openDialogSupp(element.id)"><mat-icon>delete</mat-icon></button>
-    </td>
-  </ng-container>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Aucune solution partenaire trouvé.</td>
+    </tr>
 
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">Aucune solution partenaire trouvé.</td>
-  </tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-</table>
-
+  </table>
+</div>
 <div fxLayoutAlign="center">
   <button mat-icon-button color="primary" (click)="openDialogAjout()"><mat-icon>add_circle_outline</mat-icon></button>
 </div>

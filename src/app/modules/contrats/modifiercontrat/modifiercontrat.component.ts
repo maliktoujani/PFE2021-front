@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Contrat, ContratService } from 'src/app/restApi/contrat.service';
+import { Contrat, ContratService } from 'src/app/services/contrat.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogeditcontratComponent } from 'src/app/dialog/dialogeditcontrat/dialogeditcontrat.component';

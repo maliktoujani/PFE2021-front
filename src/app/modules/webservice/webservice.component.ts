@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogajoutwebserviceComponent } from 'src/app/dialog/dialogajoutwebservice/dialogajoutwebservice.component';
 import { DialogeditwebserviceComponent } from 'src/app/dialog/dialogeditwebservice/dialogeditwebservice.component';
 import { DialogsuppwebserviceComponent } from 'src/app/dialog/dialogsuppwebservice/dialogsuppwebservice.component';
-import { Contrat } from 'src/app/restApi/contrat.service';
-import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { Contrat } from 'src/app/services/contrat.service';
+import { WebService, WebserviceService } from 'src/app/services/webservice.service';
 import { environment } from 'src/environments/environment';
 
 @Component({

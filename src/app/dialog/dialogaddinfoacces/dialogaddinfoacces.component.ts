@@ -3,9 +3,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { InfoAcces, InfoaccesService } from 'src/app/restApi/infoacces.service';
-import { PeriodeAcces, PeriodeaccesService } from 'src/app/restApi/periodeacces.service';
-import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { InfoAcces, InfoaccesService } from 'src/app/services/infoacces.service';
+import { PeriodeAcces, PeriodeaccesService } from 'src/app/services/periodeacces.service';
+import { WebService, WebserviceService } from 'src/app/services/webservice.service';
 
 export interface day {
   name: string;

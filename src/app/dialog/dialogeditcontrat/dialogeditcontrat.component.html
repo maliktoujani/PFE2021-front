@@ -1,31 +1,43 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <h2 mat-dialog-title>Modifier un contrat</h2>
 
-    <ul>
-        <form [formGroup]="myForm">
-            <li><mat-form-field><mat-label>Titre</mat-label><input matInput formControlName="title" required></mat-form-field></li>
-            <li>              
-            <mat-form-field>
-                <mat-label>Date début</mat-label>
-                <input matInput placeholder="DD-MM-YYYY" [matDatepicker]="picker" formControlName="dateDebut" required>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            </li>  
-            <li>
-                <mat-form-field>
-                    <mat-label>Date fin</mat-label>
-                    <input matInput placeholder="DD-MM-YYYY" [matDatepicker]="picker2" formControlName="dateFin" required>
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-            </li>  
 
-            <li><mat-form-field><mat-label>Label</mat-label><input matInput formControlName="label"></mat-form-field></li>
+        <form [formGroup]="myForm">
+            <div class="container">
+                <div class="col">
+                    <div class="row">
+                        <mat-form-field><mat-label>Titre</mat-label><input matInput formControlName="title" required></mat-form-field>
+                    </div>
+                    <div class="row">              
+                    <mat-form-field>
+                        <mat-label>Date début</mat-label>
+                        <input matInput placeholder="DD-MM-YYYY" [matDatepicker]="picker" formControlName="dateDebut" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    </div>  
+                    <div class="row">
+                        <mat-form-field>
+                            <mat-label>Date fin</mat-label>
+                            <input matInput placeholder="DD-MM-YYYY" [matDatepicker]="picker2" formControlName="dateFin" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>  
+
+                    <div class="row">
+                        <mat-form-field><mat-label>Label</mat-label><input matInput formControlName="label"></mat-form-field>
+                    </div>
+                </div>
+            </div>
         </form>
-            <li><mat-form-field><mat-label>Solution partenaire</mat-label><input matInput [(ngModel)]="solutionPartenaireUsername" [readonly]="true"></mat-form-field></li>
-    </ul>
-    <div fxLayout="row" fxLayoutAlign="center center">
+            <div class="container">
+                <div class="row">
+                    <mat-form-field><mat-label>Solution partenaire</mat-label><input matInput [(ngModel)]="solutionPartenaireUsername" [readonly]="true"></mat-form-field>
+                </div>
+            </div>
+
+    <div class="d-flex justify-content-center">
         <button mat-button type="submit" (click)="editContrat()" [disabled]="myForm.invalid">Valider</button>
         <button mat-button id="closebutton" mat-dialog-close>Annuler</button>
     </div>

@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { WebService, WebserviceService } from 'src/app/restApi/webservice.service';
+import { WebService, WebserviceService } from 'src/app/services/webservice.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
