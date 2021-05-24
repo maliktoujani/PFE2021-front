@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModifiercontratComponent } from './modifiercontrat.component';
+import { DefaultComponent } from '../default/default.component';
 
-describe('ModifiercontratComponent', () => {
-  let component: ModifiercontratComponent;
-  let fixture: ComponentFixture<ModifiercontratComponent>;
+describe('DefaultComponent', () => {
+  let component: DefaultComponent;
+  let fixture: ComponentFixture<DefaultComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModifiercontratComponent ]
+      declarations: [ DefaultComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModifiercontratComponent);
+    fixture = TestBed.createComponent(DefaultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

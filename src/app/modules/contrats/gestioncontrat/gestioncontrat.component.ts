@@ -10,9 +10,9 @@ import { DialogsuppinfoaccesComponent } from 'src/app/dialog/dialogsuppinfoacces
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-modifiercontrat',
-  templateUrl: './modifiercontrat.component.html',
-  styleUrls: ['./modifiercontrat.component.scss'],
+  selector: 'app-gestioncontrat',
+  templateUrl: './gestioncontrat.component.html',
+  styleUrls: ['./gestioncontrat.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
     ]),
   ],
 })
-export class ModifiercontratComponent implements OnInit {
+export class GestioncontratComponent implements OnInit {
 
   isTableExpanded = false;
   displayedColumns= ["title", "dateDebut", "dateFin", "solutionPartenaire", "label", "details", "actions"];
