@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DefaultComponent } from './layouts/default/default.component';
-import { LoginComponent } from './login/login.component';
+import { DefaultComponent } from './default/default.component';
+import { LoginComponent } from './modules/login/login.component';
 import { AjoutcontratComponent } from './modules/contrats/ajoutcontrat/ajoutcontrat.component';
-import { ModifiercontratComponent } from './modules/contrats/modifiercontrat/modifiercontrat.component';
+import { GestioncontratComponent } from './modules/contrats/gestioncontrat/gestioncontrat.component';
 import { SolutionpartenaireComponent } from './modules/solutionpartenaire/solutionpartenaire.component';
 import { WebserviceComponent } from './modules/webservice/webservice.component';
 import { AuthguardService } from './services/authguard.service';
@@ -20,7 +20,7 @@ const routes: Routes = [
       {path:'', component: RapportparwebserviceComponent},
       {path:'solutionpartenaire', component: SolutionpartenaireComponent},
       {path:'ajoutcontrat', component: AjoutcontratComponent},
-      {path:'modifiercontrat', component: ModifiercontratComponent},
+      {path:'gestioncontrat', component: GestioncontratComponent},
       {path:'webservice', component: WebserviceComponent},
       {path:'appelswebservice',
         children: [
