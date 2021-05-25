@@ -13,7 +13,7 @@
 <mat-divider></mat-divider>
 <br>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <mat-card class="col-lg-4">
             <h4><strong>Le web service le plus utilisé:</strong></h4>
@@ -25,14 +25,14 @@
 
         <mat-card class="col-lg-4">
             <canvas baseChart
-            [datasets]="pieChartData"
+            [data]="pieChartData"
             [labels]="pieChartLabels"
             chartType="pie"></canvas>
         </mat-card>
 
         <mat-card class="col-lg-4">
             <canvas baseChart
-            [datasets]="doughnutChartData"
+            [data]="doughnutChartData"
             [labels]="doughnutChartLabels"
             chartType="doughnut"></canvas>
         </mat-card>

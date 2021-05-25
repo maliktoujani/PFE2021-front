@@ -1,9 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HistoriqueAppel, HistoriqueappelService } from 'src/app/services/historiqueappel.service';
-import { WebService, WebserviceService } from 'src/app/services/webservice.service';
+import { WebserviceService } from 'src/app/services/webservice.service';
 import { environment } from 'src/environments/environment';
-import { DataPerWebService } from '../rapportparwebservice/rapportparwebservice.component';
 
 @Component({
   selector: 'app-rapportparsolutionpartenaire',
@@ -12,28 +11,22 @@ import { DataPerWebService } from '../rapportparwebservice/rapportparwebservice.
 })
 export class RapportparsolutionpartenaireComponent implements OnInit {
 
-  public barChartOptions = {
+  barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
   };
 
-  public barChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-  public barChartLegend = true;
-  public barChartData = [];
+  barChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  barChartLegend = true;
+  barChartData = [];
 
-  public pieChartLabels = ['Vermeg', 'Poulina', 'Talys consulting'];
-  public pieChartData = [];
+  pieChartLabels = [];
+  pieChartData = [];
 
-  public doughnutChartLabels = ['Reussite', 'Echec'];
-  public doughnutChartData = [];
+  doughnutChartLabels = [];
+  doughnutChartData = [];
   
-  public radarChartLabels = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-
-  dataPerDay1:number[];
-  dataPerDayTot:any;
-  webServices:WebService[];
   todaysAppels:HistoriqueAppel[];
-  dataPerWebService:DataPerWebService[];
   url=environment.apiBaseUrl+'/webservice/';
   topone:any;
 
@@ -79,7 +72,8 @@ export class RapportparsolutionpartenaireComponent implements OnInit {
   public getStatistiquePercentageBySolutionPartenaire(){
     this.historiqueappelService.getStatistiquePercentageBySolutionPartenaire().subscribe(
       (response: any) => {
-        this.pieChartData = response;
+        this.pieChartData = response.data;
+        this.pieChartLabels = response.label;    
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -90,7 +84,8 @@ export class RapportparsolutionpartenaireComponent implements OnInit {
   public getStatistiqueReussiteEchec(){
     this.historiqueappelService.getStatistiqueReussiteEchec().subscribe(
       (response: any) => {
-        this.doughnutChartData = response;        
+        this.doughnutChartData = response.data;
+        this.doughnutChartLabels = response.label;        
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
