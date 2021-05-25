@@ -3,27 +3,24 @@
         <button mat-icon-button (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
         <span>Arabsoft</span>
 
-        <div fxFlex fxLayout="row" fxLayoutAlign="end" class="align-self-end">
-            <ul fxLayout="row" fxLayoutGap="20px">
-                <li>
-                    <button mat-icon-button>
-                        <mat-icon>help_outline</mat-icon>
+        <div class="container-fluid">
+            <div class="row justify-content-end gap-3">
+                <button mat-icon-button>
+                    <mat-icon>help_outline</mat-icon>
+                </button>
+        
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>person_outline</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="onOpenSettings()">
+                        <mat-icon>settings</mat-icon>Paramètres
                     </button>
-                </li>
-                <li>
-                    <button mat-icon-button [matMenuTriggerFor]="menu">
-                        <mat-icon>person_outline</mat-icon>
+                    <button mat-menu-item (click)="onLogout()">
+                        <mat-icon>exit_to_app</mat-icon>Déconnexion
                     </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="onOpenSettings()">
-                            <mat-icon>settings</mat-icon>Paramètres
-                        </button>
-                        <button mat-menu-item (click)="onLogout()">
-                            <mat-icon>exit_to_app</mat-icon>Déconnexion
-                        </button>
-                    </mat-menu>
-                </li>
-            </ul>
+                </mat-menu>
+            </div>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
@@ -36,7 +33,7 @@
     
     <mat-nav-list>
 
-        <div class="row" class="text-center">
+        <div class="text-center">
             <br>
             <img src="https://www.bootdey.com/img/Content/avatar/avatar7.png" alt="Photo de profile">
             <br>
