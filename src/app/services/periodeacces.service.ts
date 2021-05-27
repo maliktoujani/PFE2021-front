@@ -16,35 +16,28 @@ export interface PeriodeAcces {
 export class PeriodeaccesService {
 
   private apiServerUrl=environment.apiBaseUrl+'/admin/periodeacces';
+  headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(sessionStorage.getItem('username') + ':' + sessionStorage.getItem('password')) });
+
   constructor(private http: HttpClient) { }
 
   public getAllPeriodeAcces(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/all`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/all`,{'headers': this.headers});
   }
 
   public addPeriodeAcces(periodeacces:PeriodeAcces): Observable<PeriodeAcces>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<PeriodeAcces>(`${this.apiServerUrl}/add`,periodeacces,{headers});
+    return this.http.post<PeriodeAcces>(`${this.apiServerUrl}/add`,periodeacces,{'headers': this.headers});
   }
 
   public addlistPeriodeAccesWithInfoAcces(periodeacces:PeriodeAcces[], infoAccesId:number): Observable<PeriodeAcces>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<PeriodeAcces>(`${this.apiServerUrl}/addlistPeriodeAccesWithInfoAcces/${infoAccesId}`,periodeacces,{headers});
+    return this.http.post<PeriodeAcces>(`${this.apiServerUrl}/addlistPeriodeAccesWithInfoAcces/${infoAccesId}`,periodeacces,{'headers': this.headers});
   }
 
   public updatePeriodeAcces(periodeacces:PeriodeAcces): Observable<PeriodeAcces>{
-    return this.http.put<PeriodeAcces>(`${this.apiServerUrl}/update`,periodeacces);
+    return this.http.put<PeriodeAcces>(`${this.apiServerUrl}/update`,periodeacces,{'headers': this.headers});
   }
 
   public deletePeriodeAcces(periodeaccesId: string): Observable<void>{
-    return this.http.delete<void>(`${this.apiServerUrl}/delete/${periodeaccesId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${periodeaccesId}`,{'headers': this.headers});
   }
 
 }

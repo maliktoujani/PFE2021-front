@@ -1,4 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -13,6 +14,9 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 })
 export class DefaultComponent implements OnInit {
 
+  loggedUsername: string;
+  loggedEmail: string;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
   .pipe(
     map(result => result.matches),
@@ -21,9 +25,23 @@ export class DefaultComponent implements OnInit {
 
   constructor(private breakpointObserver: BreakpointObserver,
               private dialog:MatDialog, 
-              private logoutservice: AuthentificationService) {}
+              private logoutservice: AuthentificationService,
+              private authentification: AuthentificationService) {}
 
   ngOnInit(){ 
+    this.getLoggedUser();
+  }
+
+  getLoggedUser(){
+    this.authentification.getLoggedUser().subscribe(
+      (response: any) => {
+        this.loggedUsername = response.username;
+        this.loggedEmail = response.email;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+      );
   }
 
   onOpenSettings(){
