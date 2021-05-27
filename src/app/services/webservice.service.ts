@@ -18,28 +18,24 @@ export interface WebService {
 export class WebserviceService {
 
   private apiServerUrl=environment.apiBaseUrl+'/admin/webservice';
+  headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(sessionStorage.getItem('username') + ':' + sessionStorage.getItem('password')) });
+
   constructor(private http: HttpClient) { }
 
   public getAllWebServices(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/all`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/all`,{'headers': this.headers});
   }
 
   public addWebService(webservice: WebService): Observable<WebService>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<WebService>(`${this.apiServerUrl}/add`,webservice,{headers});
+    return this.http.post<WebService>(`${this.apiServerUrl}/add`,webservice,{'headers': this.headers});
   }
 
   public updateWebService(webservice: WebService): Observable<WebService>{
-    return this.http.put<WebService>(`${this.apiServerUrl}/update`,webservice);
+    return this.http.put<WebService>(`${this.apiServerUrl}/update`,webservice,{'headers': this.headers});
   }
 
   public deleteWebService(webServiceId: string): Observable<void>{
-    return this.http.delete<void>(`${this.apiServerUrl}/delete/${webServiceId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${webServiceId}`,{'headers': this.headers});
   }
 }
 

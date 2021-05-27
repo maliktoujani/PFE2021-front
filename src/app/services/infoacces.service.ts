@@ -20,42 +20,32 @@ export class InfoAcces {
 export class InfoaccesService {
 
   private apiServerUrl=environment.apiBaseUrl+'/admin/infoacces';
+  headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(sessionStorage.getItem('username') + ':' + sessionStorage.getItem('password')) });
+
   constructor(private http: HttpClient) { }
 
   public getAllInfoAcces(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/all`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/all`,{'headers': this.headers});
   }
 
   public addInfoAcces(infoacces:InfoAcces): Observable<InfoAcces>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<InfoAcces>(`${this.apiServerUrl}/add`,infoacces,{headers});
+    return this.http.post<InfoAcces>(`${this.apiServerUrl}/add`,infoacces,{'headers': this.headers});
   }
 
   public updateInfoAcces(infoacces:InfoAcces): Observable<InfoAcces>{
-    return this.http.put<InfoAcces>(`${this.apiServerUrl}/update`,infoacces);
+    return this.http.put<InfoAcces>(`${this.apiServerUrl}/update`,infoacces,{'headers': this.headers});
   }
 
   public deleteInfoAcces(infoaccesId: string): Observable<void>{
-    return this.http.delete<void>(`${this.apiServerUrl}/delete/${infoaccesId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${infoaccesId}`,{'headers': this.headers});
   }
 
   public getInfoAccesById(infoaccesId: string): Observable<InfoAcces>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<InfoAcces>(`${this.apiServerUrl}/find/${infoaccesId}`,{headers});
+    return this.http.get<InfoAcces>(`${this.apiServerUrl}/find/${infoaccesId}`,{'headers': this.headers});
   }
 
   public addInfoAccesWithContrat(infoacces:InfoAcces, contratId:number): Observable<InfoAcces>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<InfoAcces>(`${this.apiServerUrl}/addinfoacceswithcontrat/${contratId}`,infoacces,{headers});
+    return this.http.post<InfoAcces>(`${this.apiServerUrl}/addinfoacceswithcontrat/${contratId}`,infoacces,{'headers': this.headers});
   }
 
 }

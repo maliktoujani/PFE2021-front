@@ -19,34 +19,24 @@ export interface Contrat {
 export class ContratService {
 
   private apiServerUrl=environment.apiBaseUrl+'/admin/contrat';
+  headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(sessionStorage.getItem('username') + ':' + sessionStorage.getItem('password')) });
+
   constructor(private http: HttpClient) { }
 
   public getAllContrats(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/all`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/all`,{'headers': this.headers});
   }
 
   public addContrat(contrat: Contrat): Observable<Contrat>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<Contrat>(`${this.apiServerUrl}/add`,contrat,{headers});
+    return this.http.post<Contrat>(`${this.apiServerUrl}/add`,contrat,{'headers': this.headers});
   }
 
   public updateContrat(contrat: Contrat): Observable<Contrat>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.put<Contrat>(`${this.apiServerUrl}/update`,contrat,{headers});
+    return this.http.put<Contrat>(`${this.apiServerUrl}/update`,contrat,{'headers': this.headers});
   }
 
   public deleteContrat(contratId: string): Observable<void>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.delete<void>(`${this.apiServerUrl}/delete/${contratId}`,{headers});
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${contratId}`,{'headers': this.headers});
   }
 }
 

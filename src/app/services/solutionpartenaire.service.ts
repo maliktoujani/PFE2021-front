@@ -21,36 +21,24 @@ export interface SolutionPartenaire {
 export class SolutionPartenaireService {
 
   private apiServerUrl=environment.apiBaseUrl+'/admin/solutionpartenaire';
-
+  headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(sessionStorage.getItem('username') + ':' + sessionStorage.getItem('password')) });
   
   constructor(private http: HttpClient) { }
 
   public getAllSolutions(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/all`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/all`,{'headers': this.headers});
   }
 
   public addSolutionPartenaire(solutionpartenaire: SolutionPartenaire): Observable<SolutionPartenaire>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<SolutionPartenaire>(`${this.apiServerUrl}/add`,solutionpartenaire,{headers});
+    return this.http.post<SolutionPartenaire>(`${this.apiServerUrl}/add`,solutionpartenaire,{'headers': this.headers});
   }
 
   public updateSolutionPartenaire(solutionpartenaire: SolutionPartenaire): Observable<SolutionPartenaire>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.put<SolutionPartenaire>(`${this.apiServerUrl}/update`,solutionpartenaire,{headers});
+    return this.http.put<SolutionPartenaire>(`${this.apiServerUrl}/update`,solutionpartenaire,{'headers': this.headers});
   }
 
   public deleteSolutionPartenaire(solutionpartenaireId: string): Observable<void>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.delete<void>(`${this.apiServerUrl}/delete/${solutionpartenaireId}`,{headers});
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${solutionpartenaireId}`,{'headers': this.headers});
   }
 
 }

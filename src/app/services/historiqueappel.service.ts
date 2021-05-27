@@ -20,97 +20,60 @@ export interface HistoriqueAppel {
 export class HistoriqueappelService {
 
   private apiServerUrl=environment.apiBaseUrl+'/admin/historiqueappel';
+  headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(sessionStorage.getItem('username') + ':' + sessionStorage.getItem('password')) });
+
   constructor(private http: HttpClient) { }
 
   public getAllHistoriqueAppel(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/all`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/all`,{'headers': this.headers});
   }
 
   public getStatistiquePerDay(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperday`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperday`,{'headers': this.headers});
   }
 
   public getStatistiqueReussiteEchec(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/statistiquereussiteechec`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/statistiquereussiteechec`,{'headers': this.headers});
   }
 
   
   public getStatistiqueTop(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/statistiquetop`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/statistiquetop`,{'headers': this.headers});
   }
   
   public getStatistiqueTopSolutionPartenaire(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/statistiquetopsolutionpartenaire`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/statistiquetopsolutionpartenaire`,{'headers': this.headers});
   }
 
   public getStatistiquePerDayBySolutionPartenaire(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperdaybysolutionpartenaire`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperdaybysolutionpartenaire`,{'headers': this.headers});
   }
 
   public getStatistiquePercentage(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/statistiquepercentage`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/statistiquepercentage`,{'headers': this.headers});
   }
 
   public getStatistiquePercentageBySolutionPartenaire(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/statistiquepercentagebysolutionpartenaire`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/statistiquepercentagebysolutionpartenaire`,{'headers': this.headers});
   }
 
   public getStatistiquePerDayByWebService(webServiceId: number): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperday/${webServiceId}`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/statistiqueperday/${webServiceId}`,{'headers': this.headers});
   }
 
   public getTodaysAppelWebService(): Observable<any>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<any>(`${this.apiServerUrl}/todaysappelwebservice`,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/todaysappelwebservice`,{'headers': this.headers});
   }
 
   public addHistoriqueAppel(historiqueAppel: HistoriqueAppel): Observable<HistoriqueAppel>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.post<HistoriqueAppel>(`${this.apiServerUrl}/add`,historiqueAppel,{headers});
+    return this.http.post<HistoriqueAppel>(`${this.apiServerUrl}/add`,historiqueAppel,{'headers': this.headers});
   }
 
   public updateHistoriqueAppel(historiqueAppel: HistoriqueAppel): Observable<HistoriqueAppel>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.put<HistoriqueAppel>(`${this.apiServerUrl}/update`,historiqueAppel,{headers});
+    return this.http.put<HistoriqueAppel>(`${this.apiServerUrl}/update`,historiqueAppel,{'headers': this.headers});
   }
 
   public deleteHistoriqueAppel(historiqueAppelId: number): Observable<void>{
-    let username='admin'
-    let password='admin'
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.delete<void>(`${this.apiServerUrl}/delete/${historiqueAppelId}`,{headers});
+    return this.http.delete<void>(`${this.apiServerUrl}/delete/${historiqueAppelId}`,{'headers': this.headers});
   }
 }
