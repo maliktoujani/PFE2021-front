@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { SolutionPartenaire } from './solutionpartenaire.service';
+import { InfoAcces } from './infoacces.service';
 
 export interface Contrat {
   id:number;
@@ -11,6 +12,7 @@ export interface Contrat {
   dateFin:Date;
   label:string;
   solutionPartenaire:SolutionPartenaire;
+  infoAcces:InfoAcces[];
 }
 
 @Injectable({
@@ -27,6 +29,10 @@ export class ContratService {
     return this.http.get<any>(`${this.apiServerUrl}/all`,{'headers': this.headers});
   }
 
+  public getContratById(id: number): Observable<any>{
+    return this.http.get<any>(`${this.apiServerUrl}/find/${id}`,{'headers': this.headers});
+  }
+
   public addContrat(contrat: Contrat): Observable<Contrat>{
     return this.http.post<Contrat>(`${this.apiServerUrl}/add`,contrat,{'headers': this.headers});
   }
@@ -37,6 +43,10 @@ export class ContratService {
 
   public deleteContrat(contratId: string): Observable<void>{
     return this.http.delete<void>(`${this.apiServerUrl}/delete/${contratId}`,{'headers': this.headers});
+  }
+
+  public imprimerContrat(contratId: number): Observable<any>{
+    return this.http.get<any>(`${this.apiServerUrl}/report/${contratId}`,{'headers': this.headers, responseType:'text' as 'json'});
   }
 }
 

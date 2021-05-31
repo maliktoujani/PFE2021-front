@@ -25,7 +25,7 @@ export class DialogajoutwebserviceComponent implements OnInit {
     this.myForm=this.formBuilder.group({
       url:['', [Validators.required]],
       format:['', [Validators.required]],
-      methodeHttp:['', [Validators.required]]
+      methodeHttp:['']
     })
   }
 
@@ -41,7 +41,7 @@ export class DialogajoutwebserviceComponent implements OnInit {
     );
   }
 
-    openSnackBar(message, action?) {
+  openSnackBar(message, action?) {
     let snackbarref = this.snackBar.open(message, action, {duration:2500});
   }
 

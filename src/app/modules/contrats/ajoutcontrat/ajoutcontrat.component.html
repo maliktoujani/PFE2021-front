@@ -92,7 +92,7 @@
               <button mat-icon-button color="primary"><mat-icon (click)="onAddPeriodeAcces()">add_circle_outline</mat-icon></button>
             </div>
 
-            <button mat-raised-button type="submit" color="primary"  (click)="onAjouter()" [disabled]="periodeAccesForm.invalid || infoAccesForm.invalid">Ajouter l'accés</button>
+            <button mat-raised-button type="submit" color="primary"  (click)="addInfoAccesWithContrat()" [disabled]="periodeAccesForm.invalid || infoAccesForm.invalid">Ajouter l'accés</button>
             <button mat-button (click)="ngOnInit()">Annuler</button>
 
           </div>
@@ -100,10 +100,34 @@
         <br>
         <mat-divider></mat-divider>
         <br>
-        <button mat-button color="primary" [disabled]="newInfoAcces==null" matStepperNext>Terminer</button>
+        <button mat-button color="primary" (click)="findContrat()" matStepperNext>Terminer</button>
     </mat-step>
 
     <mat-step label="Finalisation" optional>
-        <p>Imprimer le contrat</p>
+
+        <mat-list *ngIf="newContrat">
+            <mat-list-item mat-subheader>Numéro du contrat : {{newContrat.id}}</mat-list-item>
+            <mat-list-item mat-subheader>Titre du contrat : {{newContrat.title}}</mat-list-item>
+            <mat-list-item mat-subheader>Période du contrat : {{newContrat.dateDebut}} - {{newContrat.dateFin}}</mat-list-item>
+            <mat-list-item mat-subheader>Solution partenaire : {{newContrat.solutionPartenaire.username}}</mat-list-item>
+            <mat-list-item mat-subheader>Label : {{newContrat.label}}</mat-list-item>
+            <mat-list-item mat-subheader>Accés :</mat-list-item>
+                <mat-list>
+                    <div *ngFor="let infoAcces of newContrat.infoAcces">
+                        <div mat-subheader> Web service : {{url}}{{infoAcces.webService.id}}</div>
+                            <div *ngFor="let periode of infoAcces.periodeAcces">
+                                <div mat-subheader><ul><li>Jour : {{periode.jour}} | Heure début : {{periode.heureDebut}}h | Heure fin : {{periode.heureFin}}h</li></ul></div>
+                            </div>
+                            <br>
+                            <mat-divider></mat-divider>
+                            <br>
+                    </div>
+                </mat-list>
+
+            <button mat-stroked-button color="primary" (click)="imprimerContrat()"><mat-icon>print</mat-icon></button>
+            <a id="openContrat" target="_blank" href="assets/reports/contrat_{{newContrat.id}}.pdf"></a>
+
+        </mat-list>
+
     </mat-step>
 </mat-vertical-stepper>

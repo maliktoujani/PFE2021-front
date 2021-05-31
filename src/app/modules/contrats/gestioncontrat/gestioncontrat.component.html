@@ -53,6 +53,7 @@
 
           <div class="student-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
               <mat-list>
+                  <br>
                   <mat-list-item mat-subheader>Détails du contrat : {{element.title}}</mat-list-item>
                   <mat-list-item mat-subheader>Période du contrat : {{element.dateDebut}} - {{element.dateFin}}</mat-list-item>
                   <mat-list-item mat-subheader>Solution partenaire : {{element.solutionPartenaire.username}}</mat-list-item>
@@ -69,6 +70,9 @@
                               <br>
                       </div>
                     </mat-list>
+                    <button mat-stroked-button color="primary" (click)="imprimerContrat(element.id)"><mat-icon>print</mat-icon></button>
+                    <a *ngIf="printContrat" id="openContrat" target="_blank" href="assets/reports/contrat_{{printContrat.id}}.pdf"></a>
+                    <br><br>
               </mat-list>
           </div>
 

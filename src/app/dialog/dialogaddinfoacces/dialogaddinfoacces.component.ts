@@ -20,13 +20,13 @@ export interface day {
 export class DialogaddinfoaccesComponent implements OnInit {
 
   days: day[] = [
-    {name: 'Lundi', value: 'MONDAY'},
-    {name: 'Mardi', value: 'TUESDAY'},
-    {name: 'Mercredi', value: 'WEDNESDAY'},
-    {name: 'Jeudi', value: 'THURSDAY'},
-    {name: 'Vendredi', value: 'FRIDAY'},
-    {name: 'Samedi', value: 'SATURDAY'},
-    {name: 'Dimanche', value: 'SUNDAY'}
+    {name: 'Lundi', value: 'Monday'},
+    {name: 'Mardi', value: 'Tuesday'},
+    {name: 'Mercredi', value: 'Wednesday'},
+    {name: 'Jeudi', value: 'Thursday'},
+    {name: 'Vendredi', value: 'Friday'},
+    {name: 'Samedi', value: 'Saturday'},
+    {name: 'Dimanche', value: 'Sunday'}
   ]
 
   newInfoAcces:InfoAcces;

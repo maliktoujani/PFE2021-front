@@ -27,6 +27,7 @@ export class GestioncontratComponent implements OnInit {
   displayedColumns= ["title", "dateDebut", "dateFin", "solutionPartenaire", "label", "details", "actions"];
   contrats:Contrat[];
   url=environment.apiBaseUrl+'/webservice/';
+  printContrat: Contrat;
 
   constructor(private contratService: ContratService, private dialog?:MatDialog){}
 
@@ -81,6 +82,30 @@ export class GestioncontratComponent implements OnInit {
       }
     });
   }
+
+  imprimerContrat(id: number): void {
+    this.findContrat(id);
+    this.contratService.imprimerContrat(id).subscribe(
+      (response: any) => {
+        document.getElementById('openContrat').click();        
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public findContrat(id: number): void {
+    this.contratService.getContratById(id).subscribe(
+      (response: Contrat) => {
+        this.printContrat=response;
+      },
+      (error: HttpErrorResponse) => {
+          alert(error.message);
+      }
+    );
+  }
+
 
   public searchContrats(key:string):void{
     const results:Contrat[]=[];
