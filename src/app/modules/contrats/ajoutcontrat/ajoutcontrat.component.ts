@@ -7,6 +7,7 @@ import { InfoAcces, InfoaccesService } from 'src/app/services/infoacces.service'
 import { PeriodeAcces, PeriodeaccesService } from 'src/app/services/periodeacces.service';
 import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/services/solutionpartenaire.service';
 import { WebService, WebserviceService } from 'src/app/services/webservice.service';
+import { environment } from 'src/environments/environment';
 
 export interface day {
   name: string;
@@ -21,13 +22,13 @@ export interface day {
 export class AjoutcontratComponent implements OnInit{
 
   days: day[] = [
-    {name: 'Lundi', value: 'MONDAY'},
-    {name: 'Mardi', value: 'TUESDAY'},
-    {name: 'Mercredi', value: 'WEDNESDAY'},
-    {name: 'Jeudi', value: 'THURSDAY'},
-    {name: 'Vendredi', value: 'FRIDAY'},
-    {name: 'Samedi', value: 'SATURDAY'},
-    {name: 'Dimanche', value: 'SUNDAY'}
+    {name: 'Lundi', value: 'Monday'},
+    {name: 'Mardi', value: 'Tuesday'},
+    {name: 'Mercredi', value: 'Wednesday'},
+    {name: 'Jeudi', value: 'Thursday'},
+    {name: 'Vendredi', value: 'Friday'},
+    {name: 'Samedi', value: 'Saturday'},
+    {name: 'Dimanche', value: 'Sunday'}
   ]
 
   solutions:SolutionPartenaire[];
@@ -35,6 +36,8 @@ export class AjoutcontratComponent implements OnInit{
   
   newContrat:Contrat;
   newInfoAcces:InfoAcces;
+
+  url=environment.apiBaseUrl+'/webservice/';
 
   periodeAccesForm:FormGroup;
   contratForm:FormGroup;
@@ -124,15 +127,12 @@ export class AjoutcontratComponent implements OnInit{
     this.periodeAccesForms.removeAt(index)
   }
 
-  onAjouter(){
-    this.addInfoAccesWithContrat();
-  }
-
-
   public addListPeriodeAccesWithInfoAcces(): void {
     this.periodeAccesService.addlistPeriodeAccesWithInfoAcces(this.periodeAccesForm.controls['periodeAcces'].value, this.newInfoAcces.id).subscribe(
       (response: PeriodeAcces) => {
-        this.ngOnInit();
+        this.infoAccesForm.reset();
+        this.periodeAccesForms.reset();
+
         this.openSnackBar('Accés ajouté avec succées.'); 
       },
       (error: HttpErrorResponse) => {
@@ -146,12 +146,35 @@ export class AjoutcontratComponent implements OnInit{
   public addInfoAccesWithContrat(): void {
     this.infoAccesService.addInfoAccesWithContrat(this.infoAccesForm.value, this.newContrat.id).subscribe(
       (response: InfoAcces) => {
-        this.newInfoAcces=response; 
+        this.newInfoAcces=response;         
         this.addListPeriodeAccesWithInfoAcces();       
       },
       (error: HttpErrorResponse) => {
           alert(error.message);
           this.openSnackBar('Veuillez ajouter un accés !');
+      }
+    );
+  }
+
+  imprimerContrat(): void {
+    this.contratService.imprimerContrat(this.newContrat.id).subscribe(
+      (response: any) => {
+        document.getElementById('openContrat').click();        
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  
+  public findContrat(): void {
+    this.contratService.getContratById(this.newContrat.id).subscribe(
+      (response: Contrat) => {
+        this.newContrat=response;
+      },
+      (error: HttpErrorResponse) => {
+          alert(error.message);
       }
     );
   }
