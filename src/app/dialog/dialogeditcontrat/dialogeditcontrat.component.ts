@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Contrat, ContratService } from 'src/app/services/contrat.service';
 import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/services/solutionpartenaire.service';
 
@@ -19,7 +20,8 @@ export class DialogeditcontratComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) private data,
               private formBuilder: FormBuilder,
               private solutionpartenaireService: SolutionPartenaireService,
-              private contratService: ContratService) { }
+              private contratService: ContratService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getSolutions();
@@ -51,7 +53,7 @@ export class DialogeditcontratComponent implements OnInit {
     document.getElementById('closebutton').click();
     this.contratService.updateContrat(this.myForm.value).subscribe(
       (response: Contrat) => {
-                
+        this.openSnackBar('Contrat modifié avec succées.'); 
       },
       (error: HttpErrorResponse) => {
           alert(error.message);
@@ -59,4 +61,7 @@ export class DialogeditcontratComponent implements OnInit {
     );
   }
 
+  openSnackBar(message, action?) {
+  let snackbarref = this.snackBar.open(message, action, {duration:2500});
+  }
 }

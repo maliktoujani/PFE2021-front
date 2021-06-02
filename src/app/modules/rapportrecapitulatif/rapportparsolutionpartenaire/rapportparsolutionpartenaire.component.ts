@@ -50,7 +50,7 @@ export class RapportparsolutionpartenaireComponent implements OnInit {
   public getTodaysAppelWebService(){
     this.historiqueappelService.getTodaysAppelWebService().subscribe(
       (response: HistoriqueAppel[]) => {
-        this.todaysAppels=response;
+        this.todaysAppels=response.reverse();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
