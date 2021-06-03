@@ -75,7 +75,6 @@ export class AjoutcontratComponent implements OnInit{
 
   }
 
-
   public getSolutions(){
     this.solutionpartenaireService.getAllSolutions().subscribe(
       (response: SolutionPartenaire[]) => {
@@ -132,7 +131,6 @@ export class AjoutcontratComponent implements OnInit{
       (response: PeriodeAcces) => {
         this.infoAccesForm.reset();
         this.periodeAccesForms.reset();
-
         this.openSnackBar('Accés ajouté avec succées.'); 
       },
       (error: HttpErrorResponse) => {

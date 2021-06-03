@@ -20,7 +20,7 @@
             <th><span>Résultat d'appel</span></th>
             </tr>
         
-            <tr *ngFor="let historiqueAppel of solutionpartenaire.historiqueAppels">
+            <tr *ngFor="let historiqueAppel of solutionpartenaire.historiqueAppels.reverse()">
             <td>{{url}}{{historiqueAppel.webService.id}}</td>
             <td>{{historiqueAppel.dateHeure | date:'fullDate'}}</td>
             <td>{{historiqueAppel.dateHeure | date:'mediumTime'}}</td>

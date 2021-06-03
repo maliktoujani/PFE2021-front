@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SolutionPartenaire, SolutionPartenaireService } from 'src/app/services/solutionpartenaire.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class DialogeditComponent implements OnInit {
 
   constructor(public solutionpartenaireService: SolutionPartenaireService, 
               @Inject(MAT_DIALOG_DATA) private data,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(){
     this.myForm=this.formBuilder.group({
@@ -31,7 +33,7 @@ export class DialogeditComponent implements OnInit {
     document.getElementById('closebutton').click();
     this.solutionpartenaireService.updateSolutionPartenaire(this.myForm.value).subscribe(
       (response: SolutionPartenaire) => {
-                
+        this.openSnackBar('Solution partenaire modifié avec succées.');
       },
       (error: HttpErrorResponse) => {
           alert(error.message);
@@ -39,4 +41,7 @@ export class DialogeditComponent implements OnInit {
     );
   }
 
+  openSnackBar(message, action?) {
+    let snackbarref = this.snackBar.open(message, action, {duration:2500});
+  }
 }
